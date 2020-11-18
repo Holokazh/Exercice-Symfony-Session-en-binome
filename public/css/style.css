@@ -1,0 +1,9 @@
+.table {
+    width: 80%;
+    margin: 2em auto;
+    border: 1px solid #dee2e6;
+}
+
+.thead {
+    background-color: #00A8FF;
+}
