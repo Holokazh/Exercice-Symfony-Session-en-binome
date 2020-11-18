@@ -19,5 +19,4 @@ class HomeController extends AbstractController
     }
 
     /* TEST BONJOUR GILLES */
-    /* Bonjour Virgile */
 }
