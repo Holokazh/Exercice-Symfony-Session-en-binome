@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des stagiaires{% endblock %}
+
+{% block body %}
+<div class="table-responsive containerIndex">
+<table class="table">
+	<thead class="thead">
+		<tr>
+            <th>Nom</th>
+            <th>Date de naissance</th>
+            <th>Ville</th>
+            <th>Adresse email</th>
+            <th>Détails</th>
+        </tr>
+	</thead>
+    <tbody>
+    {% for student in students %}
+        <tr>
+            <td>{{ student.firstName ~ ' ' ~ student.LastName}}</td>
+            <td>{{ student.birthDay | date('d/m/Y') }}</td>
+            <td>{{ student.city }}</td>
+            <td>{{ student.email }}</td>
+            <th><a href="#">Détails</a></th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
