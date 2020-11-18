@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Exo Session V-B
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			<!-- Font Awesome icons (free version)-->
+			<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+			<!-- Bootstrap -->
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+			<!-- CSS -->
+			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		{% endblock %}
+	</head>
+	<body>
+		{% block body %}{% endblock %}
+		{% block javascripts %}
+			<!-- jQuery -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		{% endblock %}
+	</body>
+</html>
