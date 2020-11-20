@@ -15,3 +15,8 @@ td, th {
 .btnAjout {
     margin-left: 15em
 }
+
+form {
+    width: 25%;
+    margin: 5em 0 2em 15em;
+}
