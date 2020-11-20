@@ -24,6 +24,12 @@ class Category
      */
     private $name;
 
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * @ORM\OneToMany(targetEntity=Module::class, mappedBy="Category", orphanRemoval=true)
      */
@@ -55,12 +61,6 @@ class Category
         $this->name = $name;
 
         return $this;
-    }
-
-    ///// METHODE MAGIQUE __toString /////
-    public function __toString()
-    {
-        return $this->getName();
     }
 
     /**
