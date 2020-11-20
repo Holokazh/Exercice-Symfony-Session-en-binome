@@ -7,3 +7,7 @@
 .thead {
     background-color: #00A8FF;
 }
+
+td, th {
+    text-align: center;
+}

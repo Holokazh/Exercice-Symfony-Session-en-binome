@@ -153,7 +153,7 @@ class Student
         return $this;
     }
 
-    ///// METHODE MAGIQUE toString /////
+    ///// METHODE MAGIQUE __toString /////
     public function __toString()
     {
         return $this->getFirstName() . ' ' . $this->getLastName();

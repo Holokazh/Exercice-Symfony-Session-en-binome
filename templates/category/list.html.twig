@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des catégories
+{% endblock %}
+
+{% block body %}
+	<div class="table-responsive containerIndex">
+		<table class="table">
+			<thead class="thead">
+				<tr>
+					<th>Nom de la catégorie</th>
+					<th>Module(s)</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr>
+						<td>{{ category.name }}</td>
+						<td> à faire plus tard </td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

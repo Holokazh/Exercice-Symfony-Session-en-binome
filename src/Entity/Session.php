@@ -45,6 +45,11 @@ class Session
      */
     private $students;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbPlaceReservated;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
@@ -103,7 +108,19 @@ class Session
         return $this;
     }
 
-    ///// METHODE MAGIQUE toString /////
+    public function getNbPlaceReservated(): ?int
+    {
+        return $this->nbPlaceReservated;
+    }
+
+    public function setNbPlaceReservated(int $nbPlaceReservated): self
+    {
+        $this->nbPlaceReservated = $nbPlaceReservated;
+
+        return $this;
+    }
+
+    ///// METHODE MAGIQUE __toString /////
     public function __toString()
     {
         return $this->getNbSpace() . ' ' . $this->getDateStart() . ' ' . $this->getDateEnd();

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des modules
+{% endblock %}
+
+{% block body %}
+	<div class="table-responsive containerIndex">
+		<table class="table">
+			<thead class="thead">
+				<tr>
+					<th>Intitulé Session</th>
+					<th>Date de début</th>
+					<th>Date de fin</th>
+					<th>Nombre de places</th>
+					<th>Places réservées</th>
+					<th>Places restantes</th>
+					<th>Détail programme</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for session in sessions %}
+					<tr>
+						<td></td>
+						<td>{{ session.dateStart | date('d/m/Y') }}</td>
+						<td>{{ session.dateEnd | date('d/m/Y') }}</td>
+						<td>{{ session.nbSpace }}</td>
+						<td>{{ session.nbPlaceReservated }}</td>
+						<td></td>
+						<td>
+							<a href="#">Détails</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

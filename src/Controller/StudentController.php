@@ -21,14 +21,14 @@ class StudentController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/student/listAllStudents", name="listAllStudents")
      */
     public function listAllStudents(): Response
     {
         $students = $this->getDoctrine()
-        ->getRepository(Student::class)
-        ->findAll();
+            ->getRepository(Student::class)
+            ->findAll();
 
         return $this->render('student/list.html.twig', [
             'students' => $students,

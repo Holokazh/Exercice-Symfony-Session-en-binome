@@ -13,6 +13,9 @@ use App\Repository\TrainingRepository;
 
 class SessionController extends AbstractController
 {
+
+    /////-- SESSION --/////
+
     /**
      * @Route("/session", name="session")
      */
@@ -23,13 +26,44 @@ class SessionController extends AbstractController
         ]);
     }
 
-        /**
+    /**
+     * @Route("/session/listAllSessions", name="listAllSessions")
+     */
+    public function listAllSessions(): Response
+    {
+        $sessions = $this->getDoctrine()
+            ->getRepository(Session::class)
+            ->findAll();
+
+        return $this->render('session/list.html.twig', [
+            'sessions' => $sessions,
+        ]);
+    }
+
+
+    /////-- TRAINING --/////
+
+    /**
      * @Route("/training", name="training")
      */
     public function indexTraining(): Response
     {
         return $this->render('training/index.html.twig', [
             'controller_name' => 'SessionController',
+        ]);
+    }
+
+        /**
+     * @Route("/training/listAllTrainings", name="listAllTrainings")
+     */
+    public function listAllTrainings(): Response
+    {
+        $trainings = $this->getDoctrine()
+            ->getRepository(Training::class)
+            ->findAll();
+
+        return $this->render('training/list.html.twig', [
+            'trainings' => $trainings,
         ]);
     }
 }

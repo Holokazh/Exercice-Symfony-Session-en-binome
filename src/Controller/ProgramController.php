@@ -13,6 +13,9 @@ use App\Repository\ModuleRepository;
 
 class ProgramController extends AbstractController
 {
+
+    /////-- CATEGORY --/////
+
     /**
      * @Route("/category", name="category")
      */
@@ -23,13 +26,43 @@ class ProgramController extends AbstractController
         ]);
     }
 
-        /**
+    /**
+     * @Route("/category/listAllCategories", name="listAllCategories")
+     */
+    public function listAllCategories(): Response
+    {
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findAll();
+
+        return $this->render('category/list.html.twig', [
+            'categories' => $categories,
+        ]);
+    }
+
+    /////-- MODULE --/////
+
+    /**
      * @Route("/module", name="module")
      */
     public function indexModule(): Response
     {
         return $this->render('module/index.html.twig', [
             'controller_name' => 'ProgramController',
+        ]);
+    }
+
+    /**
+     * @Route("/module/listAllModules", name="listAllModules")
+     */
+    public function listAllModules(): Response
+    {
+        $modules = $this->getDoctrine()
+            ->getRepository(Module::class)
+            ->findAll();
+
+        return $this->render('module/list.html.twig', [
+            'modules' => $modules,
         ]);
     }
 }

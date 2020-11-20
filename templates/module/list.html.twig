@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des modules
+{% endblock %}
+
+{% block body %}
+	<div class="table-responsive containerIndex">
+		<table class="table">
+			<thead class="thead">
+				<tr>
+					<th>Nom des modules</th>
+					<th>Durée</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for module in modules %}
+					<tr>
+						<td>{{ module.name }}</td>
+						<td> à faire plus tard </td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

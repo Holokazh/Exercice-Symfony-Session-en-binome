@@ -74,7 +74,7 @@ class Training
         return $this;
     }
 
-    ///// METHODE MAGIQUE toString /////
+    ///// METHODE MAGIQUE __toString /////
     public function __toString()
     {
         return $this->getName();

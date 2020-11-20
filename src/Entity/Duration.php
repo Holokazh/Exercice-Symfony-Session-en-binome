@@ -75,7 +75,7 @@ class Duration
         return $this;
     }
 
-    ///// METHODE MAGIQUE toString /////
+    ///// METHODE MAGIQUE __toString /////
     public function __toString()
     {
         return $this->getNbDay();
