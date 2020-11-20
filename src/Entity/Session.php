@@ -103,6 +103,12 @@ class Session
         return $this;
     }
 
+    ///// METHODE MAGIQUE toString /////
+    public function __toString()
+    {
+        return $this->getNbSpace() . ' ' . $this->getDateStart() . ' ' . $this->getDateEnd();
+    }
+
     /**
      * @return Collection|Student[]
      */

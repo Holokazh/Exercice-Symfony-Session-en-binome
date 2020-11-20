@@ -22,9 +22,9 @@ class StudentController extends AbstractController
     }
 
         /**
-     * @Route("/student/listAllStudent", name="listAllStudent")
+     * @Route("/student/listAllStudents", name="listAllStudents")
      */
-    public function listAllStudent(): Response
+    public function listAllStudents(): Response
     {
         $students = $this->getDoctrine()
         ->getRepository(Student::class)

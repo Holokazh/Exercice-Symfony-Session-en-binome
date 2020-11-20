@@ -295,6 +295,12 @@ class User implements UserInterface
         return $this;
     }
 
+    ///// METHODE MAGIQUE toString /////
+    public function __toString()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
     /**
      * @return Collection|Category[]
      */

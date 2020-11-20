@@ -74,6 +74,12 @@ class Training
         return $this;
     }
 
+    ///// METHODE MAGIQUE toString /////
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * @return Collection|Session[]
      */
