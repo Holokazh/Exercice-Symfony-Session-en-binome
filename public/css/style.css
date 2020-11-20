@@ -1,3 +1,69 @@
+/***** BASE.HTML.TWIG *****/
+/***** GLOBALS SETTINGS *****/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F6F6F6;
+}
+
+nav, footer {
+    background-color: #00A8FF;
+}
+
+header a, h1, p, footer a, h1, p  {
+    color: #333 !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+header a:hover, footer a:hover {
+    color: #F6F6F6 !important;
+}
+
+/***** NAVIGATION BAR *****/
+.navbar-brand, h1 {
+    font-weight: bold;
+}
+
+nav > .nav-link {
+    font-weight: bold;
+    margin-left: 5rem;
+}
+
+/***** FOOTER *****/
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .container {
+    margin: 3em auto;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+footer a {
+    display: block;
+}
+
+.divFooter {
+    text-align: center;
+}
+
+.divFooterCenter a{
+    margin-bottom: 1.5em;
+}
+
+
+
+/***** VIEW LIST *****/
 .table {
     width: auto;
     margin: 5em 0 2em 15em;
@@ -16,6 +82,9 @@ td, th {
     margin-left: 15em
 }
 
+
+
+/***** FORM ADD AND EDIT *****/
 form {
     width: 25%;
     margin: 5em 0 2em 15em;
