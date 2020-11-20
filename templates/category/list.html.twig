@@ -4,23 +4,32 @@
 {% endblock %}
 
 {% block body %}
-<p><a href="{{ path('home') }}">< Retour à l'accueil<a></p>
-	<div class="table-responsive containerIndex">
-		<table class="table">
-			<thead class="thead">
-				<tr>
-					<th>Nom de la catégorie</th>
-					<th>Module(s)</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for category in categories %}
-					<tr>
-						<td>{{ category.name }}</td>
-						{# <td>{{ category.modules.name }}</td> #}
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-{% endblock %}
+	<a href="{{ path('home') }}">Retour à l'accueil<a>
+			<div class="table-responsive containerIndex">
+				<table class="table">
+					<thead class="thead">
+						<tr>
+							<th>Nom de la catégorie</th>
+							<th>Modifier</th>
+							<th>Supprimer</th>
+							{# <th>Module(s)</th> #}
+						</tr>
+					</thead>
+					<tbody>
+						{% for category in categories %}
+							<tr>
+								<td>{{ category.name }}</td>
+								<td>
+									<a href="#" class="btn btn-info">Modifier</a>
+								</td>
+								<td>
+									<a href="#" class="btn btn-danger">Supprimer</a>
+								</td>
+								{# <td>{% for module in category.modules %}{{ module ~ ' - ' }}{% endfor %}</td> #}
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<a href="#" class="btn btn-primary btnAjout">Ajouter une catégorie</a>
+			</div>
+		{% endblock %}

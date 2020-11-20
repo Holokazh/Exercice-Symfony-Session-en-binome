@@ -27,7 +27,7 @@ class Category
     ///// METHODE MAGIQUE __toString /////
     public function __toString()
     {
-        return $this->getName();
+        return $this->name;
     }
 
     /**

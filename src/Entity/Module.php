@@ -69,12 +69,6 @@ class Module
         return $this;
     }
 
-    ///// METHODE MAGIQUE __toString /////
-    public function __toString()
-    {
-        return $this->getName();
-    }
-
     /**
      * @return Collection|Duration[]
      */
@@ -103,5 +97,11 @@ class Module
         }
 
         return $this;
+    }
+
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->name;
     }
 }
