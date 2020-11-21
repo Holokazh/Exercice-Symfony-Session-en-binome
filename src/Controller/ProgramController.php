@@ -70,6 +70,20 @@ class ProgramController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}/delete", name="category_delete")
+     */
+    public function deleteCategory(Category $category = null, EntityManagerInterface $manager)
+    {
+        $manager->remove($category);
+        $manager->flush();
+
+        return $this->redirectToRoute('listAllCategories');
+    }
+
+
+
+
     /////-- MODULE --/////
 
     /**

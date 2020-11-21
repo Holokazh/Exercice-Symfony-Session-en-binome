@@ -12,7 +12,7 @@ nav, footer {
     background-color: #00A8FF;
 }
 
-header a, h1, p, footer a, h1, p  {
+header *, footer *  {
     color: #333 !important;
 }
 
@@ -80,6 +80,10 @@ td, th {
 
 .btnAjout {
     margin-left: 15em
+}
+
+.fa-info-circle {
+    font-size: 2em;
 }
 
 
