@@ -44,8 +44,8 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="category_add")
-     * @Route("/{id}/edit", name="category_edit")
+     * @Route("/category/add", name="category_add")
+     * @Route("/category/{id}/edit", name="category_edit")
      */
     public function new_update(Category $category = null, Request $request, EntityManagerInterface $manager)
     {

@@ -86,7 +86,9 @@ td, th {
     font-size: 2em;
 }
 
-
+table tr:nth-child(even){
+    background-color:#e0e0e0;
+  }
 
 /***** FORM ADD AND EDIT *****/
 form {
