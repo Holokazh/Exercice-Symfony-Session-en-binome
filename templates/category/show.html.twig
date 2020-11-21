@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails {{ category.name }}
+{% endblock %}
+
+{% block main %}
+	<div class="table-responsive containerIndex">
+		<table class="table">
+			<thead class="thead">
+				<tr>
+					<th>{{ category.name }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr>
+						<td>{% for module in category.modules %}{{ module ~ ' - ' }}{% endfor %}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{{ path('category_add') }}" class="btn btn-primary btnAjout">Ajouter une catégorie</a>
+	</div>
+{% endblock %}
