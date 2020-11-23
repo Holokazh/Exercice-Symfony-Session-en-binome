@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
+
+{% block title %}
+{{ text }} stagiaire
+{% endblock %}
+
+{% block main %}
+<a href="{{ path('listAllStudents') }}">Retour<a>
+    
+<h1>{{ text }} stagiaire <span>{{ student }}</span></h1>
+{{ form(formStudent) }}
+
+{% endblock %}

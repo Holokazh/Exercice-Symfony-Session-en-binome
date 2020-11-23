@@ -1,18 +1,26 @@
 /***** BASE.HTML.TWIG *****/
+
 /***** GLOBALS SETTINGS *****/
+
 * {
     box-sizing: border-box;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     background-color: #F6F6F6;
+    margin-bottom: 250px;
 }
 
 nav, footer {
     background-color: #00A8FF;
 }
 
-header *, footer *  {
+header *, footer * {
     color: #333 !important;
 }
 
@@ -25,11 +33,12 @@ header a:hover, footer a:hover {
 }
 
 /***** NAVIGATION BAR *****/
+
 .navbar-brand, h1 {
     font-weight: bold;
 }
 
-nav > .nav-link {
+nav>.nav-link {
     font-weight: bold;
     margin-left: 5rem;
 }
@@ -39,10 +48,12 @@ nav > .nav-link {
 }
 
 /***** FOOTER *****/
+
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+    height: 250px;
 }
 
 footer .container {
@@ -61,13 +72,12 @@ footer a {
     text-align: center;
 }
 
-.divFooterCenter a{
+.divFooterCenter a {
     margin-bottom: 1.5em;
 }
 
-
-
 /***** VIEW LIST *****/
+
 .table {
     width: auto;
     margin: 5em 0 2em 15em;
@@ -90,19 +100,19 @@ td, th {
     font-size: 2em;
 }
 
-table tr:nth-child(even){
-    background-color:#e0e0e0;
-  }
-
-
+table tr:nth-child(even) {
+    background-color: #e0e0e0;
+}
 
 /***** FORM ADD AND EDIT *****/
+
 form {
     width: 25%;
     margin: 5em 0 2em 15em;
 }
 
 /***** VIEW SHOW *****/
+
 .tableShow {
     width: 30% !important;
 }
