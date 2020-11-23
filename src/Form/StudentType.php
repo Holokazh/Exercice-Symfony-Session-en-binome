@@ -34,7 +34,7 @@ class StudentType extends AbstractType
 
             ->add('birthDay', BirthdayType::class, ['label' => 'Date de naissance', 'format' => 'ddMMyyyy', 'years' => range(date("Y") - 18, date("Y") - 120)])
 
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, ['label' => 'Adresse email'])
 
             ->add('city', TextType::class, ['label' => 'Ville'])
 
