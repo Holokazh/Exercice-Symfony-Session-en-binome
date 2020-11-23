@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Session;
+use App\Entity\Training;
+use App\Form\SessionType;
+
+use App\Repository\SessionRepository;
+use App\Repository\TrainingRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-use App\Entity\Session;
-use App\Repository\SessionRepository;
-use App\Entity\Training;
-use App\Repository\TrainingRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
 {
@@ -90,7 +93,7 @@ class SessionController extends AbstractController
         return $this->render('session/add_edit.html.twig', [
             'formSession' => $form->createView(),
             'editMode' => $session->getId() !== null,
-            'session' => $session->getName()
+            'session' => "Session de " . $session->getTraining()
         ]);
     }
 
