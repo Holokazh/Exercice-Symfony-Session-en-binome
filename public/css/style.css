@@ -98,9 +98,21 @@ form {
     margin: 5em 0 2em 15em;
 }
 
-
-
 /***** VIEW SHOW *****/
 .tableShow {
     width: 30% !important;
 }
+
+/* **** HOME ****
+#homeDiv {
+    background-color: rgba(00, 168, 255, 0.4);
+    margin: 5em 0 2em 15em;
+    display: table;
+    padding: 20px;
+}
+
+#homeDiv form {
+    margin: 0;
+    width: 100%;
+    margin-bottom: 10px;
+} */
