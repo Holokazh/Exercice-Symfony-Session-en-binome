@@ -34,6 +34,10 @@ nav > .nav-link {
     margin-left: 5rem;
 }
 
+.btn-logout {
+    margin-left: 0 !important;
+}
+
 /***** FOOTER *****/
 footer {
     position: absolute;
