@@ -123,7 +123,7 @@ class Session
     ///// METHODE MAGIQUE __toString /////
     public function __toString()
     {
-        return $this->getNbSpace() . ' ' . $this->getDateStart() . ' ' . $this->getDateEnd();
+        return $this->getTraining() . ' du ' . $this->getDateStart() . ' au ' . $this->getDateEnd();
     }
 
     /**

@@ -122,6 +122,11 @@ form {
     height: auto;
     background-color: #0083c5;
     margin: 5em 0 2em 15em;
+    padding: 1em;
+}
+
+.containerShow p {
+    margin: 0.3em 0;
 }
 
 /* **** HOME ****

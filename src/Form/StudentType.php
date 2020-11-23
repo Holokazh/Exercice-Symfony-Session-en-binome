@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -22,8 +23,8 @@ class StudentType extends AbstractType
         $builder
             ->add('title', ChoiceType::class, [
                 'choices' => [
-                    'Mr' => 'Mr',
-                    'Mme' => 'Mme',
+                    'M.' => 'M.',
+                    'Mme.' => 'Mme.',
                 ],
                 'label' => 'Civilité'
             ])
@@ -38,7 +39,7 @@ class StudentType extends AbstractType
 
             ->add('city', TextType::class, ['label' => 'Ville'])
 
-            ->add('phoneNumber', TextType::class, ['label' => 'Téléphone'])
+            ->add('phoneNumber', TelType::class, ['label' => 'Téléphone'])
 
             ->add('valider', SubmitType::class);
     }

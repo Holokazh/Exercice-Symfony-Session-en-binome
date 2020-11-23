@@ -6,6 +6,16 @@
 
 {% block main %}
 	<div class="table-responsive containerShow">
-	test
+	<h3>Profil du stagiaire</h3>
+	<h1>{{ student.firstName ~ ' ' ~ student.lastName }}</h1>
+	<p>Date de naissance : {{ student.birthDay | date('d/m/Y') }}</p>
+	<p>Ville : {{ student.city }}</p>
+	<p>Courriel : {{ student.email }}</p>
+	<p>Téléphone : {{ student.phoneNumber }}</p>
+
+	<h4>Session(s) prévue(s)</h4>
+	{% for session in student.sessions %}
+	- {{ "Session de " ~ session.training ~ " du " ~ session.dateStart | date("d/m/Y") ~ " au " ~ session.dateEnd | date("d/m/Y") }}
+	{% endfor %}
 	</div>
 {% endblock %}
