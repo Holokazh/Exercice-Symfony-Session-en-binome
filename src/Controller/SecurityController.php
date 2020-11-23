@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -29,7 +30,7 @@ class SecurityController extends AbstractController
      * @Route("/user/add", name="user_add")
      * @Route("/user/{id}/edit", name="user_edit")
      */
-    public function new_update(User $user = null, Request $request, EntityManagerInterface $manager)
+    public function new_update(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
         if (!$user) {
             $user = new User();
@@ -39,6 +40,12 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
             $manager->persist($user);
             $manager->flush();
 
