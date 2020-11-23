@@ -15,6 +15,8 @@
 					<th>Places réservées</th>
 					<th>Places restantes</th>
 					<th>Détail programme</th>
+					<th>Modifier</th>
+					<th>Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,6 +30,12 @@
 						<td></td>
 						<td>
 							<a href="#">Détails</a>
+						</td>
+						<td>
+							<a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-info">Modifier</a>
+						</td>
+						<td>
+							<a href="{{ path('session_delete', {'id':session.id}) }}" class="btn btn-danger">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}

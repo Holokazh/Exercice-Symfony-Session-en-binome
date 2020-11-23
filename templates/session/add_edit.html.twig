@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
+
+{% block title %}
+{{ text }} session
+{% endblock %}
+
+{% block main %}
+<a href="{{ path('listAllSessions') }}">Retour<a>
+    
+<h1>{{ text }} session <span>{{ session }}</span></h1>
+{{ form(formSession) }}
+
+{% endblock %}
