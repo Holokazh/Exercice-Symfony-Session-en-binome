@@ -71,7 +71,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="category_delete")
+     * @Route("/category/{id}/delete", name="category_delete")
      */
     public function deleteCategory(Category $category = null, EntityManagerInterface $manager)
     {
@@ -81,7 +81,13 @@ class ProgramController extends AbstractController
         return $this->redirectToRoute('listAllCategories');
     }
 
-
+    /**
+     * @Route("/category/{id}/show", name="category_show")
+     */
+    public function show(Category $category): Response
+    {
+        return $this->render('category/show.html.twig', ['category' => $category]);
+    }
 
 
     /////-- MODULE --/////

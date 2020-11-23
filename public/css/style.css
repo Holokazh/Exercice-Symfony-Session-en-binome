@@ -95,3 +95,8 @@ form {
     width: 25%;
     margin: 5em 0 2em 15em;
 }
+
+/***** VIEW SHOW *****/
+.tableShow {
+    width: 30% !important;
+}

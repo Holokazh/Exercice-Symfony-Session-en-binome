@@ -20,7 +20,7 @@
 					<tr>
 						<td>{{ category.name }}</td>
 						<td>
-							<a href="#">
+							<a href="{{ path('category_show', {'id':category.id}) }}">
 								<i class="fas fa-info-circle"></i>
 							</a>
 						</td>
