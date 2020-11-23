@@ -1,7 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.user.firstName ~ ' ' ~ app.user.lastName }}{% endblock %}
+{% block title %}
+	{{ app.user.firstName ~ ' ' ~ app.user.lastName }}
+{% endblock %}
 
 {% block main %}
-test
+	<div class="table-responsive containerShow">
+		<div class="divAvatar"><img src="{{ app.user.avatar }}" alt=""></div>
+		<div>
+			<h3>Profil</h3>
+			<h1>{{ app.user.title ~ ' ' ~ app.user.firstName ~ ' ' ~ app.user.lastName }}</h1>
+			<p>Date de naissance :
+				{{ app.user.birthDay | date('d/m/Y') }}</p>
+			<p>Adresse :
+				{{ app.user.address }}
+				{{ app.user.zipCode }},
+				{{ app.user.city }}</p>
+			<p>Courriel :
+				{{ app.user.email }}</p>
+			<p>Téléphone :
+				{{ app.user.phoneNumber }}</p>
+			<p>
+				Chez V-B Formation depuis le :
+				{{ app.user.hiringDate | date('d/m/Y') }}</p>
+		</div>
+	</div>
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
+
+{% block title %}
+{{ text }} utilisateur
+{% endblock %}
+
+{% block main %}
+<a href="{{ path('listAllUsers') }}">Retour<a>
+    
+<h1>{{ text }} utilisateur <span>{{ app.user }}</span></h1>
+{{ form(formUser) }}
+
+{% endblock %}

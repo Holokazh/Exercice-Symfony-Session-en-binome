@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des stagiaires
+{% endblock %}
+
+{% block main %}
+	<div class="table-responsive containerIndex">
+		<table class="table">
+			<thead class="thead">
+				<tr>
+					<th>Nom</th>
+					<th>Date de naissance</th>
+					<th>Ville</th>
+					<th>Adresse email</th>
+					<th>Détails</th>
+					<th>Modifier</th>
+					<th>Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ app.user.firstName ~ ' ' ~ app.user.LastName }}</td>
+						<td>{{ app.user.birthDay | date('d/m/Y') }}</td>
+						<td>{{ app.user.city }}</td>
+						<td>{{ app.user.email }}</td>
+						<td>
+							<a href="{{ path('user', {'id':app.user.id}) }}">Détails</a>
+						</td>
+						<td>
+							<a href="{{ path('user_edit', {'id':app.user.id}) }}" class="btn btn-info">Modifier</a>
+						</td>
+						<td>
+							<a href="{{ path('user_delete', {'id':app.user.id}) }}" class="btn btn-danger">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{{ path('user_add') }}" class="btn btn-primary btnAjout">Ajouter un utilisateur</a>
+	</div>
+{% endblock %}

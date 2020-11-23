@@ -23,8 +23,8 @@ class SessionType extends AbstractType
             ->add('dateStart', DateType::class)
             ->add('dateEnd', DateType::class)
             ->add('nbPlaceReservated', IntegerType::class)
-            ->add('training', TextType::class)
-            ->add('students')
+            ->add('training', ChoiceType::class)
+            // ->add('students')
             ->add('valider', SubmitType::class);
     }
 
