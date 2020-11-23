@@ -6,18 +6,19 @@ use App\Entity\Session;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class SessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbSpace')
-            ->add('dateStart')
-            ->add('dateEnd')
-            ->add('nbPlaceReservated')
-            ->add('training')
-            ->add('students')
+            ->add('nbSpace', IntegerType::class)
+            ->add('dateStart', DateTimeType::class)
+            ->add('dateEnd', DateTimeType::class)
+            ->add('nbPlaceReservated', IntegerType::class)
+            ->add('training', TextType::class)
+            ->add('students', TextType::class)
         ;
     }
 

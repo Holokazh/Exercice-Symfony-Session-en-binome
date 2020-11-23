@@ -93,7 +93,8 @@ class SessionController extends AbstractController
         return $this->render('session/add_edit.html.twig', [
             'formSession' => $form->createView(),
             'editMode' => $session->getId() !== null,
-            'session' => "Session de " . $session->getTraining()
+            'session' => "Session de " . $session->getTraining() . " du " . 
+            $session->getDateStart()->format("d/m/Y") . " au " . $session->getDateEnd()->format("d/m/Y")
         ]);
     }
 
