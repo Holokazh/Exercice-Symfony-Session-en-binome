@@ -23,7 +23,7 @@ class SessionType extends AbstractType
             ->add('nbPlaceReservated', IntegerType::class)
             ->add('training', ChoiceType::class)
             ->add('students')
-        ;
+            ->add('valider', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

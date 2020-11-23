@@ -43,7 +43,7 @@ nav>.nav-link {
     margin-left: 5rem;
 }
 
-.btn-logout {
+.btn-connected {
     margin-left: 0 !important;
 }
 
@@ -129,16 +129,21 @@ form {
     margin: 0.3em 0;
 }
 
-/* **** HOME ****
+/***** HOMEPAGE *****/
 #homeDiv {
     background-color: rgba(00, 168, 255, 0.4);
     margin: 5em 0 2em 15em;
     display: table;
-    padding: 20px;
+    padding: 2em;
+    border: 1px solid #333;
 }
 
 #homeDiv form {
     margin: 0;
     width: 100%;
     margin-bottom: 10px;
-} */
+}
+
+#homeDiv form input:first-child {
+    width: 60%;
+}
