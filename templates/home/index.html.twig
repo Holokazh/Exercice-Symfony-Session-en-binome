@@ -1,11 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block main %}
-<p><a href="{{ path('listAllStudents') }}">Liste des stagiaires<a></p>
-<p><a href="{{ path('listAllCategories') }}">Liste des catégories<a></p>
-<p><a href="{{ path('listAllTrainings') }}">Liste des formations<a></p>
-<p><a href="{{ path('listAllSessions') }}">Liste des sessions<a></p>
-<p><a href="{{ path('listAllModules') }}">Liste des modules<a></p>
+	<div>
+		<p>
+			<a href="{{ path('listAllStudents') }}">Liste des stagiaires</a>
+		</p>
+		<p>
+			<a href="{{ path('listAllCategories') }}">Liste des catégories</a>
+		</p>
+		<p>
+			<a href="{{ path('listAllTrainings') }}">Liste des formations</a>
+		</p>
+		<p>
+			<a href="{{ path('listAllSessions') }}">Liste des sessions</a>
+		</p>
+		<p>
+			<a href="{{ path('listAllModules') }}">Liste des modules</a>
+		</p>
+	</div>
 {% endblock %}

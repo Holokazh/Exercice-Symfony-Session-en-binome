@@ -90,11 +90,15 @@ table tr:nth-child(even){
     background-color:#e0e0e0;
   }
 
+
+
 /***** FORM ADD AND EDIT *****/
 form {
     width: 25%;
     margin: 5em 0 2em 15em;
 }
+
+
 
 /***** VIEW SHOW *****/
 .tableShow {
