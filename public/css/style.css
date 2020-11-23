@@ -117,6 +117,13 @@ form {
     width: 30% !important;
 }
 
+.containerShow {
+    width: 35%;
+    height: auto;
+    background-color: #0083c5;
+    margin: 5em 0 2em 15em;
+}
+
 /* **** HOME ****
 #homeDiv {
     background-color: rgba(00, 168, 255, 0.4);

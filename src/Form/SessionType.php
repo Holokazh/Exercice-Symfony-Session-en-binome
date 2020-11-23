@@ -6,14 +6,16 @@ use App\Entity\Session;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class SessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbSpace', IntegerType::class)
+            ->add('nbSpace', IntegerType::class, ['label' => 'Nombre de place'])
             ->add('dateStart', DateTimeType::class)
             ->add('dateEnd', DateTimeType::class)
             ->add('nbPlaceReservated', IntegerType::class)
