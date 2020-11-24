@@ -3,13 +3,14 @@
 {% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
 
 {% block title %}
-{{ text }} utilisateur
+	{{ text }}
+	utilisateur
 {% endblock %}
 
 {% block main %}
-<a href="{{ path('listAllUsers') }}">Retour<a>
-    
-<h1>{{ text }} utilisateur <span>{{ app.user }}</span></h1>
-{{ form(formUser) }}
+	<a href="{{ path('listAllUsers') }}">Retour<a>
 
-{% endblock %}
+			<h1>{{ text }}
+				utilisateur
+			</h1>
+			{{ form(formUser) }}{% endblock %}
