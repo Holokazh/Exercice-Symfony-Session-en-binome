@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\EditUserType;
 use App\Form\RegisterType;
-use App\Repository\UserRepository;
 
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,14 +28,12 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/user/add", name="user_add")
+     * @Route("/user/register", name="user_register")
      * @Route("/user/{id}/edit", name="user_edit")
      */
-    public function new_update(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
+    public function register(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
-        if (!$user) {
-            $user = new User();
-        }
+        $user = new User();
 
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
@@ -52,10 +51,38 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('listAllUsers');
         }
 
-        return $this->render('user/add_edit.html.twig', [
-            'formUser' => $form->createView(),
-            'editMode' => $user->getId() !== null,
-            'user' => $user->getEmail()
+        return $this->render('user/register.html.twig', [
+            'formRegister' => $form->createView(),
+            'title' => 'Inscription'
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}/edit", name="user_edit")
+     */
+    public function editUser(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $user = new User();
+
+        $form = $this->createForm(EditUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('listAllUsers');
+        }
+
+        return $this->render('user/register.html.twig', [
+            'formEditUser' => $form->createView(),
+            'title' => 'Modifier un utilisateur'
         ]);
     }
 
