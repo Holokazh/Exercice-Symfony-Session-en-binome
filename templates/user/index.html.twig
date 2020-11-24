@@ -25,4 +25,5 @@
 				{{ app.user.hiringDate | date('d/m/Y') }}</p>
 		</div>
 	</div>
+	<a href="{{ path('user_changePassword', {'id':app.user.id}) }}" class="btn btn-secondary btn-changePassword">Changer votre mot de passe</a>
 {% endblock %}

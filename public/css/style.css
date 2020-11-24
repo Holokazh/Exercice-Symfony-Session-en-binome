@@ -129,6 +129,10 @@ form {
     margin: 0.3em 0;
 }
 
+.btn-changePassword {
+    margin-left: 15em
+}
+
 /***** HOMEPAGE *****/
 #homeDiv {
     background-color: rgba(00, 168, 255, 0.4);
