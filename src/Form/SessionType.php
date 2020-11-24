@@ -20,12 +20,14 @@ class SessionType extends AbstractType
     {
         $builder
             ->add('nbSpace', IntegerType::class, ['label' => 'Nombre de place'])
-            ->add('dateStart', DateType::class)
-            ->add('dateEnd', DateType::class)
-            ->add('nbPlaceReservated', IntegerType::class)
+            ->add('dateStart', DateType::class, ['label' => 'Date de début', 'format' => 'ddMMyyyy',
+             'years' => range(date("Y"), date("Y") + 5), 'months' => range(date("M"), 12), 'days' => range(date('D'), 31)])
+            ->add('dateEnd', DateType::class, ['label' => 'Date de fin', 'format' => 'ddMMyyyy',
+             'years' => range(date("Y"), date("Y") + 7), 'months' => range(date("M"), 12), 'days' => range(date('D'), 31)])
             ->add('training', EntityType::class, [
                 'class' => Training::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'label' => "Formation"
             ])
             // ->add('students')
             ->add('valider', SubmitType::class);
