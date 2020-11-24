@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\EditUserType;
 use App\Form\RegisterType;
 
+use App\Form\ChangePasswordType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,6 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/user/register", name="user_register")
-     * @Route("/user/{id}/edit", name="user_edit")
      */
     public function register(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -62,7 +62,6 @@ class SecurityController extends AbstractController
      */
     public function editUser(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $user = new User();
 
         $form = $this->createForm(EditUserType::class, $user);
         $form->handleRequest($request);
@@ -80,9 +79,42 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('listAllUsers');
         }
 
-        return $this->render('user/register.html.twig', [
+        return $this->render('user/edit.html.twig', [
             'formEditUser' => $form->createView(),
             'title' => 'Modifier un utilisateur'
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}/changePassword", name="user_changePassword")
+     */
+    public function changePassword(User $user = null, EntityManagerInterface $manager, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $form = $this->createForm(ChangePasswordType::class, $user);
+        // $formOldPsw = $form->get('oldPassword')->getData();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $oldPassword = $form->get('oldPassword')->getData();
+            if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
+
+                $newPassword = $form->get('newPassword')->getData();
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $newPassword
+                    )
+                );
+
+                $manager->flush();
+
+                return $this->redirectToRoute('listAllUsers');
+            }
+        }
+
+        return $this->render('security/changePassword.html.twig', [
+            'formChangePassword' => $form->createView(),
+            'title' => 'Modifier votre mot de passe'
         ]);
     }
 

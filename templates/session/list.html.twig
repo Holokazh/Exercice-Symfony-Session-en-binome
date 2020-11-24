@@ -29,7 +29,7 @@
 						<td>{{ session.nbPlaceReservated }}</td>
 						<td></td>
 						<td>
-							<a href="#">Détails</a>
+							<a href="{{ path('session_show', {'id':session.id}) }}">Détails</a>
 						</td>
 						<td>
 							<a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-info">Modifier</a>
