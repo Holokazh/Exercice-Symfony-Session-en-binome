@@ -22,6 +22,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=50)
+    //  * @Assert\Length(min=5, minMessage="Votre catégorie doit comporter plus de {{ limit }} caractère(s).")
      */
     private $name;
 
