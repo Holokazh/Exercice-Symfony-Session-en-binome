@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails session {{ session.getTraining.getName }} {{ session.getDateStart | date('d/m/Y') }} - {{ session.getDateEnd | date('d/m/Y') }} 
+{% endblock %}
+
+{% block main %}
+	<div class="table-responsive containerShow">
+		<table class="table tableShow">
+			<thead class="thead">
+				<tr>
+					<th>Stagiaires</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for student in session.getStudents %}
+					<tr>
+						<td>{{ student.getFirstname }} {{ student.getLastname}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
