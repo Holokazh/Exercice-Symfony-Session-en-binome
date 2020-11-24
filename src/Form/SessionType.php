@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Session;
+use App\Entity\Training;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,8 +23,11 @@ class SessionType extends AbstractType
             ->add('dateStart', DateType::class)
             ->add('dateEnd', DateType::class)
             ->add('nbPlaceReservated', IntegerType::class)
-            ->add('training', ChoiceType::class)
-            ->add('students')
+            ->add('training', EntityType::class, [
+                'class' => Training::class,
+                'choice_label' => 'name'
+            ])
+            // ->add('students')
             ->add('valider', SubmitType::class);
     }
 
