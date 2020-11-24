@@ -29,7 +29,6 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/user/register", name="user_register")
-     * @Route("/user/{id}/edit", name="user_edit")
      */
     public function register(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -62,7 +61,6 @@ class SecurityController extends AbstractController
      */
     public function editUser(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $user = new User();
 
         $form = $this->createForm(EditUserType::class, $user);
         $form->handleRequest($request);
@@ -80,9 +78,39 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('listAllUsers');
         }
 
-        return $this->render('user/register.html.twig', [
+        return $this->render('user/edit.html.twig', [
             'formEditUser' => $form->createView(),
             'title' => 'Modifier un utilisateur'
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}/changePassword", name="user_changePassword")
+     */
+    public function changePassword(User $user = null, EntityManagerInterface $manager, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $form = $this->createForm(ChangePasswordType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($passwordEncoder->isPasswordValid($user, $form->get('oldPassword')->getData())) {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+
+                $manager->persist($user);
+                $manager->flush();
+
+                return $this->redirectToRoute('listAllUsers');
+            }
+        }
+
+        return $this->render('user/edit.html.twig', [
+            'formChangePassword' => $form->createView(),
+            'title' => 'Modifier votre mot de passe'
         ]);
     }
 
