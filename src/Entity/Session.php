@@ -22,7 +22,8 @@ class Session
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(min=1, minMessage = "Il doit y avoir au moins une place.")
+     * @Assert\Range(min = 1, 
+     * minMessage = "Il doit y avoir au moins une place.")
      */
     private $nbSpace;
 
@@ -31,8 +32,7 @@ class Session
      * @Assert\Date(message = "Veuillez entrer une date valide.")
      * @Assert\Range(
      *      min = "now",
-     *      max = "now + 5 year"
-     * )
+     *      max = "now +5 year")
      */
     private $dateStart;
 
@@ -41,8 +41,7 @@ class Session
      * @Assert\Date(message = "Veuillez entrer une date valide.")
      * @Assert\Range(
      *      minPropertyPath = "dateStart",
-     *      max = "now +10 year"
-     * )
+     *      max = "now +10 year")
      */
     private $dateEnd;
 
