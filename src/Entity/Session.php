@@ -29,19 +29,15 @@ class Session
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Date(message = "Veuillez entrer une date valide.")
-     * @Assert\Range(
-     *      min = "now",
-     *      max = "now +5 year")
+     * @Assert\GreaterThan("today",
+     * message = "La date de début doit être supérieur à la date d'aujourd'hui.")
      */
     private $dateStart;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Date(message = "Veuillez entrer une date valide.")
-     * @Assert\Range(
-     *      minPropertyPath = "dateStart",
-     *      max = "now +10 year")
+     * @Assert\GreaterThan(propertyPath = "dateStart",
+     * message = "La date de fin doit être supérieure à la date de début.")
      */
     private $dateEnd;
 
@@ -55,11 +51,6 @@ class Session
      * @ORM\ManyToMany(targetEntity=Student::class, inversedBy="sessions")
      */
     private $students;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $nbPlaceReservated;
 
     public function __construct()
     {
@@ -115,18 +106,6 @@ class Session
     public function setTraining(?Training $training): self
     {
         $this->training = $training;
-
-        return $this;
-    }
-
-    public function getNbPlaceReservated(): ?int
-    {
-        return $this->nbPlaceReservated;
-    }
-
-    public function setNbPlaceReservated(int $nbPlaceReservated): self
-    {
-        $this->nbPlaceReservated = $nbPlaceReservated;
 
         return $this;
     }
