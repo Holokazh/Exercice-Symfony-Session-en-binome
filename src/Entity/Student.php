@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\StudentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StudentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StudentRepository::class)
@@ -185,5 +187,11 @@ class Student
         }
 
         return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        $timeZone = new DateTimeZone('Europe/Paris');
+        return DateTime::createFromFormat('d/m/Y', self::getBirthDay()->format("d/m/Y"), $timeZone)->diff(new DateTime('now', $timeZone))->y;
     }
 }
