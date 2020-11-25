@@ -28,6 +28,7 @@ class Session
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date(message = "Veuillez entrer une date valide.")
      * @Assert\Range(
      *      min = "now",
      *      max = "now + 5 year"
@@ -37,9 +38,10 @@ class Session
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date(message = "Veuillez entrer une date valide.")
      * @Assert\Range(
      *      minPropertyPath = "dateStart",
-     *      max = "now + 10 year"
+     *      max = "now +10 year"
      * )
      */
     private $dateEnd;

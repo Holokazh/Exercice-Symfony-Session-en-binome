@@ -24,7 +24,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email(message="Veuillez renseigner un email valide")
+     * @Assert\Email(message = "L'email '{{ value }}' n'est pas valide.")
      */
     private $email;
 
@@ -51,6 +51,11 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Date(message = "La date "{{ value }}" n'est pas une date valide.")
+     * @Assert\Range(min = "now -121 year",
+     * minMessage = "Veuillez entrer une date valide.",
+     * max = "now -18 year",
+     * maxMessage = "L'utilisateur doit être majeur.")
      */
     private $birthDay;
 
@@ -81,6 +86,11 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date(message = "La date "{{ value }}" n'est pas une date valide.")
+     * @Assert\Range(minPropertyPath = "birthDay",
+     * minMessage = "L'utilisateur doit être majeur pour être embauché.",
+     * maxPropertyPath = "birthDay",
+     * maxMessage = "Veuillez entrer une date valide.")
      */
     private $hiringDate;
 
