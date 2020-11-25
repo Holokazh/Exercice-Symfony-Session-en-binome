@@ -10,6 +10,7 @@
 				<tr>
 					<th>Date de début</th>
 					<th>Date de fin</th>
+					<th>Durée (en mois)</th>
 					<th>Nombre de places</th>
 					<th>Places réservées</th>
 					<th>Places restantes</th>
@@ -23,6 +24,7 @@
 					<tr>
 						<td>{{ session.dateStart | date('d/m/Y') }}</td>
 						<td>{{ session.dateEnd | date('d/m/Y') }}</td>
+						<td>{{ session.getDuration }}</td>
 						<td>{{ session.nbSpace }}</td>
 						<td>{{ session.nbPlaceReservated }}</td>
 						<td>{{ session.nbSpace - session.nbPlaceReservated }}</td>
