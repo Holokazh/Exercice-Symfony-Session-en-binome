@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,6 +22,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=50)
+    //  * @Assert\Length(min=5, minMessage="Votre catégorie doit comporter plus de {{ limit }} caractère(s).")
      */
     private $name;
 

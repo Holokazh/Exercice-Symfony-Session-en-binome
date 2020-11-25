@@ -3,13 +3,13 @@
 {% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
 
 {% block title %}
-{{ text }} categorie
+{{ text }} catégorie
 {% endblock %}
 
 {% block main %}
 <a href="{{ path('listAllCategories') }}">Retour<a>
     
-<h1>{{ text }} categorie <span>{{ category }}</span></h1>
+<h1>{{ text }} catégorie</h1>
 {{ form(formCategory) }}
 
 {% endblock %}

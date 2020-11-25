@@ -5,6 +5,11 @@
 
 {% block main %}
 	<div class="table-responsive containerIndex">
+		{% for message in app.flashes('info') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 		<table class="table">
 			<thead class="thead">
 				<tr>

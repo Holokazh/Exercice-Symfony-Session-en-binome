@@ -107,6 +107,7 @@ class SecurityController extends AbstractController
                 );
 
                 $manager->flush();
+                $this->addFlash('info', 'Votre mot de passe a bien été changé !');
 
                 return $this->redirectToRoute('listAllUsers');
             }

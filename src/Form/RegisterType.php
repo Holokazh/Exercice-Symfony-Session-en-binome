@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RegisterType extends AbstractType
 {
@@ -26,7 +27,13 @@ class RegisterType extends AbstractType
                 'mapped'            => false,
                 'first_options'     => array('label' => 'Mot de passe'),
                 'second_options'    => array('label' => 'Confirmation du mot de passe'),
-                'invalid_message' => 'Erreur de la confirmation du mot de passe.'
+                'invalid_message' => 'Erreur de la confirmation du mot de passe.',
+                'constraints' => new Length([
+                    'min' => 8,
+                    'minMessage' => "Veuillez mettre plus de {{ limit }} caractère(s)",
+                    'max' => 15,
+                    'maxMessage' => 'Veuillez mettre moins de {{ limit }} caractère(s)'
+                ])
             ])
             ->add('title', ChoiceType::class, [
                 'choices' => [
