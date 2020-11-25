@@ -7,7 +7,6 @@ use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SessionRepository::class)
@@ -29,11 +28,19 @@ class Session
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Range(
+     *      min = "now",
+     *      max = "now + 5 year"
+     * )
      */
     private $dateStart;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Range(
+     *      minPropertyPath = "dateStart",
+     *      max = "now + 10 year"
+     * )
      */
     private $dateEnd;
 
