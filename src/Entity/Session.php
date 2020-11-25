@@ -139,4 +139,9 @@ class Session
 
         return $this;
     }
+
+    public function getDuration(): ?int
+    {
+        return $this->getDateStart()->diff($this->getDateEnd())->m;
+    }
 }
