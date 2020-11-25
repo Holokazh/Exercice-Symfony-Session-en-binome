@@ -51,7 +51,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\Date(message = "La date {{ value }} n'est pas une date valide.")
      * @Assert\Range(min = "now -121 year",
      * minMessage = "Veuillez entrer une date valide.",
      * max = "now -18 year",
@@ -86,7 +85,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Date(message = "La date {{ value }} n'est pas une date valide.")
      */
     private $hiringDate;
 
