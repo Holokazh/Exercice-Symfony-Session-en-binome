@@ -34,7 +34,7 @@ class Student
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\Date(message = "La date "{{ value }}" n'est pas une date valide.")
+     * @Assert\Date(message = "La date {{ value }} n'est pas une date valide.")
      * @Assert\Range(min = "now -121 year",
      * minMessage = "Veuillez entrer une date valide.",
      * max = "now -18 year",
@@ -54,7 +54,7 @@ class Student
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Email(message = "L'email '{{ value }}' n'est pas valide.")
+     * @Assert\Email(message = "L'email {{ value }} n'est pas valide.")
      */
     private $email;
 
