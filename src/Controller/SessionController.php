@@ -87,7 +87,7 @@ class SessionController extends AbstractController
             $manager->persist($session);
             $manager->flush();
 
-            return $this->redirectToRoute('listAllCategories');
+            return $this->redirectToRoute('listAllSessions');
         }
 
         return $this->render('session/add_edit.html.twig', [

@@ -87,10 +87,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Date(message = "La date {{ value }} n'est pas une date valide.")
-     * @Assert\Range(minPropertyPath = "birthDay",
-     * minMessage = "L'utilisateur doit être majeur pour être embauché.",
-     * maxPropertyPath = "birthDay",
-     * maxMessage = "Veuillez entrer une date valide.")
      */
     private $hiringDate;
 

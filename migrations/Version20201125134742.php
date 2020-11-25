@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20201125131956 extends AbstractMigration
+final class Version20201125134742 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -29,6 +29,7 @@ final class Version20201125131956 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE reset_password_request');
+        $this->addSql('ALTER TABLE session CHANGE nb_place_reservated nb_place_reservated INT DEFAULT 0 NOT NULL');
         $this->addSql('ALTER TABLE student CHANGE phone_number phone_number VARCHAR(15) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }
