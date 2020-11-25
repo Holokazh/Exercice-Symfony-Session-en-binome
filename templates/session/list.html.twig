@@ -8,7 +8,6 @@
 		<table class="table">
 			<thead class="thead">
 				<tr>
-					<th>Intitulé Session</th>
 					<th>Date de début</th>
 					<th>Date de fin</th>
 					<th>Nombre de places</th>
@@ -22,12 +21,11 @@
 			<tbody>
 				{% for session in sessions %}
 					<tr>
-						<td></td>
 						<td>{{ session.dateStart | date('d/m/Y') }}</td>
 						<td>{{ session.dateEnd | date('d/m/Y') }}</td>
 						<td>{{ session.nbSpace }}</td>
 						<td>{{ session.nbPlaceReservated }}</td>
-						<td></td>
+						<td>{{ session.nbSpace - session.nbPlaceReservated }}</td>
 						<td>
 							<a href="{{ path('session_show', {'id':session.id}) }}">Détails</a>
 						</td>

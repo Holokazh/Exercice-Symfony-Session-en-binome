@@ -6,6 +6,7 @@ use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SessionRepository::class)
@@ -21,6 +22,7 @@ class Session
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min=1, minMessage = "Il doit y avoir au moins une place.")
      */
     private $nbSpace;
 
