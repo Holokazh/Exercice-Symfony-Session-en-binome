@@ -38,7 +38,7 @@ class SessionController extends AbstractController
             ->getRepository(Session::class)
             ->findAll();
 
-        return $this->render('session/list.html.twig', [
+        return $this->render('session/index.html.twig', [
             'sessions' => $sessions,
         ]);
     }

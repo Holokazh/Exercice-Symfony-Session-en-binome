@@ -10,38 +10,41 @@
 				{{ message }}
 			</div>
 		{% endfor %}
-		<table class="table">
-			<thead class="thead">
-				<tr>
-					<th>Nom</th>
-					<th>Date de naissance</th>
-					<th>Ville</th>
-					<th>Adresse email</th>
-					<th>Détails</th>
-					<th>Modifier</th>
-					<th>Supprimer</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for user in users %}
+		<div class="divContainerTable">
+			<a href="{{ path('user_register') }}" class="btn btn-primary btnAjout">Ajouter un utilisateur</a>
+			<table class="table">
+				<thead class="thead">
 					<tr>
-						<td>{{ user.firstName ~ ' ' ~ user.lastName }}</td>
-						<td>{{ user.birthDay | date('d/m/Y') }}</td>
-						<td>{{ user.city }}</td>
-						<td>{{ user.email }}</td>
-						<td>
-							<a href="{{ path('user', {'id':user.id}) }}">Détails</a>
-						</td>
-						<td>
-							<a href="{{ path('user_edit', {'id':user.id}) }}" class="btn btn-info">Modifier</a>
-						</td>
-						<td>
-							<a href="{{ path('user_delete', {'id':user.id}) }}" class="btn btn-danger">Supprimer</a>
-						</td>
+						<th>Nom</th>
+						<th>Date de naissance</th>
+						<th>Ville</th>
+						<th>Adresse email</th>
+						<th>Détails</th>
+						<th>Modifier</th>
+						<th>Supprimer</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<a href="{{ path('user_register') }}" class="btn btn-primary btnAjout">Ajouter un utilisateur</a>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						<tr>
+							<td>{{ user.firstName ~ ' ' ~ user.lastName }}</td>
+							<td>{{ user.birthDay | date('d/m/Y') }}</td>
+							<td>{{ user.city }}</td>
+							<td>{{ user.email }}</td>
+							<td>
+								<a href="{{ path('user', {'id':user.id}) }}">Détails</a>
+							</td>
+							<td>
+								<a href="{{ path('user_edit', {'id':user.id}) }}" class="btn btn-info">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('user_delete', {'id':user.id}) }}" class="btn btn-danger">Supprimer</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
 	</div>
 {% endblock %}

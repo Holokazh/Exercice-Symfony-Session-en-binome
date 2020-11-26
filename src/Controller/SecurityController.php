@@ -157,14 +157,15 @@ class SecurityController extends AbstractController
 
                 $mailer->send($message);
 
-                var_dump($email);
-                return $this->redirectToRoute('app_login');
+                // return $this->redirectToRoute('app_login');
+                $this->addFlash('info', 'Le mail de récupération de mot de passe a bien été envoyé, vous pouvez aller le consulter.');
+
             }
         }
 
         return $this->render('security/forgottenPassword.html.twig', [
             'formForgottenPassword' => $form->createView(),
-            'title' => 'Récupération de mot de passe'
+            'title' => 'Réinitialisation de mot de passe'
         ]);
     }
 
@@ -195,6 +196,8 @@ class SecurityController extends AbstractController
                 
                 $manager->flush();
                 $this->addFlash('info', 'Votre mot de passe a bien été changé !');
+
+                return $this->redirectToRoute('app_login');
             }
         }
 
@@ -202,7 +205,7 @@ class SecurityController extends AbstractController
         return $this->render('/security/resetPassword.html.twig', [
             'token' => $token,
             'formResetPassword' => $form->createView(),
-            'title' => 'Récupération de mot de passe'
+            'title' => 'Réinitialisation de mot de passe'
         ]);
     }
 
