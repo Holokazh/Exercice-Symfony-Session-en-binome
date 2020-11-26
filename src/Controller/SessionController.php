@@ -44,6 +44,51 @@ class SessionController extends AbstractController
         ]);
     }
 
+/**
+     * @Route("/session/add", name="session_add")
+     * @Route("/session/{id}/edit", name="session_edit")
+     */
+    public function new_updateSession(Session $session = null, Request $request, EntityManagerInterface $manager)
+    {
+        if (!$session) {
+            $session = new Session();
+        }
+
+        $form = $this->createForm(SessionType::class, $session);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($session);
+            $manager->flush();
+
+            return $this->redirectToRoute('listAllSessions');
+        }
+
+        return $this->render('session/add_edit.html.twig', [
+            'formSession' => $form->createView(),
+            'editMode' => $session->getId() !== null,
+            'session' => $session
+        ]);
+    }
+
+    /**
+     * @Route("/session/{id}/delete", name="session_delete")
+     */
+    public function deleteSession(Session $session = null, EntityManagerInterface $manager)
+    {
+        $manager->remove($session);
+        $manager->flush();
+
+        return $this->redirectToRoute('listAllCategories');
+    }
+
+    /**
+     * @Route("/session/{id}/show", name="session_show")
+     */
+    public function showSession(Session $session): Response
+    {
+        return $this->render('session/show.html.twig', ['session' => $session]);
+    }
 
     /////-- TRAINING --/////
 
@@ -66,7 +111,7 @@ class SessionController extends AbstractController
             ->getRepository(Training::class)
             ->findAll();
 
-        return $this->render('training/list.html.twig', [
+        return $this->render('training/index.html.twig', [
             'trainings' => $trainings,
         ]);
     }
@@ -118,53 +163,7 @@ class SessionController extends AbstractController
     }
 
     /**
-     * @Route("/session/add", name="session_add")
-     * @Route("/session/{id}/edit", name="session_edit")
-     */
-    public function new_updateSession(Session $session = null, Request $request, EntityManagerInterface $manager)
-    {
-        if (!$session) {
-            $session = new Session();
-        }
-
-        $form = $this->createForm(SessionType::class, $session);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($session);
-            $manager->flush();
-
-            return $this->redirectToRoute('listAllSessions');
-        }
-
-        return $this->render('session/add_edit.html.twig', [
-            'formSession' => $form->createView(),
-            'editMode' => $session->getId() !== null,
-            'session' => $session
-        ]);
-    }
-
-    /**
-     * @Route("/session/{id}/delete", name="session_delete")
-     */
-    public function deleteSession(Session $session = null, EntityManagerInterface $manager)
-    {
-        $manager->remove($session);
-        $manager->flush();
-
-        return $this->redirectToRoute('listAllCategories');
-    }
-
-    /**
-     * @Route("/session/{id}/show", name="session_show")
-     */
-    public function showSession(Session $session): Response
-    {
-        return $this->render('session/show.html.twig', ['session' => $session]);
-    }
-
-    /**
-     * @Route("/session/{id}/show", name="session_show")
+     * @Route("/training/{id}/show", name="training_show")
      */
     public function search()
     {
