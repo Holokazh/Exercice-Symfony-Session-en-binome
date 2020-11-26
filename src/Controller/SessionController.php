@@ -57,7 +57,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/training/listAllTrainings", name="listAllTrainings")
      */
     public function listAllTrainings(): Response
@@ -161,5 +161,13 @@ class SessionController extends AbstractController
     public function showSession(Session $session): Response
     {
         return $this->render('session/show.html.twig', ['session' => $session]);
+    }
+
+    /**
+     * @Route("/session/{id}/show", name="session_show")
+     */
+    public function search()
+    {
+        $form = $this->createFormBuilder()->add('search', SearchType::class)->getForm();
     }
 }
