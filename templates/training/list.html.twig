@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des modules
+{% block title %}Liste des formations
 {% endblock %}
 
 {% block main %}
 	<div class="table-responsive containerIndex">
+		<a href="{{ path('training_add') }}" class="btn btn-primary btnAjout">Ajouter une formation</a>
 		<table class="table">
 			<thead class="thead">
 				<tr>
 					<th>Intitulé de la formation</th>
 					<th>Prochaine(s) session(s)</th>
+					<th>Modifier</th>
+					<th>Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -17,7 +20,13 @@
 					<tr>
 						<td>{{ training.name }}</td>
 						<td>
-							<a href="#">Voir les prochaines sessions</a>
+							<a href="{{ path('training_show', {'id':training.id}) }}">Voir les prochaines sessions</a>
+						</td>
+						<td>
+							<a href="{{ path('training_edit', {'id':training.id}) }}" class="btn btn-info">Modifier</a>
+						</td>
+						<td>
+							<a href="{{ path('training_delete', {'id':training.id}) }}" class="btn btn-danger">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}
