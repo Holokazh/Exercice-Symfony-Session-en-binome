@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
+{% block title %}Page de connexion
 {% endblock %}
 
 {% block main %}
@@ -8,6 +8,12 @@
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
+
+		{% for message in app.flashes('info') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 
 		{% if app.user %}
 			<div class="mb-3">
@@ -28,16 +34,18 @@
 		type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 		{# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-						        See https://symfony.com/doc/current/security/remember_me.html #}
+								        See https://symfony.com/doc/current/security/remember_me.html #}
 
 		<div class="checkbox mb-3">
 			<label>
 				<input type="checkbox" name="_remember_me">
-				Remember me
+				Se souvenir de moi
 			</label>
 		</div>
 
-		<p><a href="app_forgot_password_request">Mot de passe oublié ?</a></p>
+		<p>
+			<a href="{{ path('app_forgotten_password') }}">Mot de passe oublié ?</a>
+		</p>
 
 		<button class="btn btn-lg btn-primary" type="submit">
 			Connexion

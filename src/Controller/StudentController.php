@@ -33,7 +33,7 @@ class StudentController extends AbstractController
             ->getRepository(Student::class)
             ->findAll();
 
-        return $this->render('student/list.html.twig', [
+        return $this->render('student/index.html.twig', [
             'students' => $students,
         ]);
     }

@@ -39,7 +39,7 @@ class ProgramController extends AbstractController
             ->getRepository(Category::class)
             ->findAll();
 
-        return $this->render('category/list.html.twig', [
+        return $this->render('category/index.html.twig', [
             'categories' => $categories,
         ]);
     }

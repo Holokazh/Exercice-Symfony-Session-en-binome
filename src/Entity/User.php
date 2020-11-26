@@ -51,7 +51,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\Date(message = "La date {{ value }} n'est pas une date valide.")
      * @Assert\Range(min = "now -121 year",
      * minMessage = "Veuillez entrer une date valide.",
      * max = "now -18 year",
@@ -86,7 +85,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Date(message = "La date {{ value }} n'est pas une date valide.")
      */
     private $hiringDate;
 
@@ -99,6 +97,12 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="users")
      */
     private $categories;
+
+    /**
+     * @var string Le token servira lors de l'oubli de mot de passe
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $resetToken;
 
     public function __construct()
     {
@@ -332,6 +336,18 @@ class User implements UserInterface
         if ($this->categories->removeElement($category)) {
             $category->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }
