@@ -9,17 +9,26 @@
 			<thead class="thead">
 				<tr>
 					<th>Nom des modules</th>
-					<th>Durée</th>
+					<th>Catégorie</th>
+					<th>Modifier</th>
+					<th>Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for module in modules %}
 					<tr>
 						<td>{{ module.name }}</td>
-						<td> à faire plus tard </td>
+						<td>{{ module.category }}</td>
+						<td>
+							<a href="{{ path('module_edit', {'id':module.id}) }}" class="btn btn-info">Modifier</a>
+						</td>
+						<td>
+							<a href="{{ path('module_delete', {'id':module.id}) }}" class="btn btn-danger">Supprimer</a>
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
+		<a href="{{ path('module_add') }}" class="btn btn-primary btnAjout">Ajouter un module</a>
 	</div>
 {% endblock %}
