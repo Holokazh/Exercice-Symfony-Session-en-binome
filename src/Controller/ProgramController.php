@@ -154,12 +154,4 @@ class ProgramController extends AbstractController
 
         return $this->redirectToRoute('listAllModules');
     }
-
-    /**
-     * @Route("/module/{id}/show", name="module_show")
-     */
-    public function showModule(Module $module): Response
-    {
-        return $this->render('module/show.html.twig', ['module' => $module]);
-    }
 }
