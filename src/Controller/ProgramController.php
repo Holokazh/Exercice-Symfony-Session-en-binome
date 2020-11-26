@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Module;
 use App\Entity\Category;
-use App\Repository\ModuleRepository;
+use App\Form\ModuleType;
 use App\Form\CategoryType;
 
+use App\Repository\ModuleRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -114,5 +115,51 @@ class ProgramController extends AbstractController
         return $this->render('module/list.html.twig', [
             'modules' => $modules,
         ]);
+    }
+
+    /**
+     * @Route("/module/add", name="module_add")
+     * @Route("/module/{id}/edit", name="module_edit")
+     */
+    public function new_updateModule(Module $module = null, Request $request, EntityManagerInterface $manager)
+    {
+        if (!$module) {
+            $module = new Module();
+        }
+
+        $form = $this->createForm(ModuleType::class, $module);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($module);
+            $manager->flush();
+
+            return $this->redirectToRoute('listAllModules');
+        }
+
+        return $this->render('module/add_edit.html.twig', [
+            'formModule' => $form->createView(),
+            'editMode' => $module->getId() !== null,
+            'module' => $module
+        ]);
+    }
+
+    /**
+     * @Route("/module/{id}/delete", name="module_delete")
+     */
+    public function deleteModule(Module $module = null, EntityManagerInterface $manager)
+    {
+        $manager->remove($module);
+        $manager->flush();
+
+        return $this->redirectToRoute('listAllModules');
+    }
+
+    /**
+     * @Route("/module/{id}/show", name="module_show")
+     */
+    public function showModule(Module $module): Response
+    {
+        return $this->render('module/show.html.twig', ['module' => $module]);
     }
 }
