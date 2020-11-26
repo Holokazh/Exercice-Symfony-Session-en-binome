@@ -98,6 +98,12 @@ class User implements UserInterface
      */
     private $categories;
 
+    /**
+     * @var string Le token servira lors de l'oubli de mot de passe
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $resetToken;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -330,6 +336,18 @@ class User implements UserInterface
         if ($this->categories->removeElement($category)) {
             $category->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }

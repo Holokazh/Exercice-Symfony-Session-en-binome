@@ -7,14 +7,19 @@ use App\Form\EditUserType;
 use App\Form\RegisterType;
 
 use App\Form\ChangePasswordType;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
+use App\Form\ForgottenPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class SecurityController extends AbstractController
 {
@@ -116,6 +121,88 @@ class SecurityController extends AbstractController
         return $this->render('security/changePassword.html.twig', [
             'formChangePassword' => $form->createView(),
             'title' => 'Modifier votre mot de passe'
+        ]);
+    }
+
+    /**
+     * @Route("/security/forgotten_password", name="app_forgotten_password")
+     */
+    public function forgottenPassword(User $user = null, EntityManagerInterface $manager, Request $request, MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator): Response
+    {
+        $form = $this->createForm(ForgottenPasswordType::class);
+        $form->handleRequest($request);
+        $email = $form->get('emailResetPsw')->getData();
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneByEmail($email);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->isMethod('POST')) {
+                $token = $tokenGenerator->generateToken();
+                try {
+                    $user->setResetToken($token);
+                    $manager->flush();
+                } catch (\Exception $e) {
+                    $this->addFlash('Warning', $e->getMessage());
+                    return $this->redirectToRoute('app_login');
+                }
+
+                $url = $this->generateUrl('security_resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+
+
+
+                $message = (new Email())
+                    ->from('vb.formation68@gmail.com')
+                    ->to($user->getEmail())
+                    ->subject('Récupération de mdp test')
+                    ->text("VOICI LE LIEN DE RECUPERATION DE VOTRE MOT DE PASSE : " . $url, 'text/html')
+                    ->html("<p> VOICI LE LIEN DE RECUPERATION DE VOTRE MOT DE PASSE : " . $url, 'text/html' . "</p>");
+
+                $mailer->send($message);
+
+                var_dump($email);
+                return $this->redirectToRoute('app_login');
+            }
+        }
+
+        return $this->render('security/forgottenPassword.html.twig', [
+            'formForgottenPassword' => $form->createView(),
+            'title' => 'Récupération de mot de passe'
+        ]);
+    }
+
+    /**
+     * @Route("/security/resetPassword/{token}", name="security_resetPassword")
+     */
+    public function resetPassword(User $user = null, EntityManagerInterface $manager, Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $form = $this->createForm(ChangePasswordType::class);
+        $form->handleRequest($request);
+        // Redéfinir le user
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneByResetToken($token);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Revérifier si on est en méthode "POST"
+            if ($request->isMethod('POST')) {
+                // On va reset le token à NULL (setResetToken=NULL)
+                $user->setResetToken(NULL);
+
+                // On va set le password et l'encoder, puis flush
+                $newPassword = $form->get('newPassword')->getData();
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $newPassword
+                    )
+                );
+                
+                $manager->flush();
+                $this->addFlash('info', 'Votre mot de passe a bien été changé !');
+            }
+        }
+
+
+        return $this->render('/security/resetPassword.html.twig', [
+            'token' => $token,
+            'formResetPassword' => $form->createView(),
+            'title' => 'Récupération de mot de passe'
         ]);
     }
 
