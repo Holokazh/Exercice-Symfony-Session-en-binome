@@ -94,7 +94,7 @@ class SessionController extends AbstractController
         return $this->render('training/add_edit.html.twig', [
             'formTraining' => $form->createView(),
             'editMode' => $training->getId() !== null,
-            'training' => $training->getFirstName()
+            'training' => $training->getName()
         ]);
     }
 
