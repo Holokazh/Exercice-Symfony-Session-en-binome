@@ -1,29 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-	{{ app.user.firstName ~ ' ' ~ app.user.lastName }}
+{% block title %}Liste des stagiaires
 {% endblock %}
 
 {% block main %}
-	<div class="table-responsive containerShow">
-		<div class="divAvatar"><img src="{{ app.user.avatar }}" alt=""></div>
-		<div>
-			<h3>Profil</h3>
-			<h1>{{ app.user.title ~ ' ' ~ app.user.firstName ~ ' ' ~ app.user.lastName }}</h1>
-			<p>Date de naissance :
-				{{ app.user.birthDay | date('d/m/Y') }}</p>
-			<p>Adresse :
-				{{ app.user.address }}
-				{{ app.user.zipCode }},
-				{{ app.user.city }}</p>
-			<p>Courriel :
-				{{ app.user.email }}</p>
-			<p>Téléphone :
-				{{ app.user.phoneNumber }}</p>
-			<p>
-				Chez V-B Formation depuis le :
-				{{ app.user.hiringDate | date('d/m/Y') }}</p>
+	<div class="table-responsive containerIndex">
+		{% for message in app.flashes('info') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<div class="divContainerTable">
+			<a href="{{ path('user_register') }}" class="btn btn-primary btnAjout">Ajouter un utilisateur</a>
+			<table class="table">
+				<thead class="thead">
+					<tr>
+						<th>Nom</th>
+						<th>Date de naissance</th>
+						<th>Ville</th>
+						<th>Adresse email</th>
+						<th>Détails</th>
+						<th>Modifier</th>
+						<th>Supprimer</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						<tr>
+							<td>{{ user.firstName ~ ' ' ~ user.lastName }}</td>
+							<td>{{ user.birthDay | date('d/m/Y') }}</td>
+							<td>{{ user.city }}</td>
+							<td>{{ user.email }}</td>
+							<td>
+								<a href="{{ path('user_show', {'id':user.id}) }}">Détails</a>
+							</td>
+							<td>
+								<a href="{{ path('user_edit', {'id':user.id}) }}" class="btn btn-info">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('user_delete', {'id':user.id}) }}" class="btn btn-danger">Supprimer</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
+
 	</div>
-	<a href="{{ path('user_changePassword', {'id':app.user.id}) }}" class="btn btn-secondary btn-changePassword">Changer votre mot de passe</a>
 {% endblock %}

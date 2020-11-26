@@ -21,6 +21,14 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/user/{id}/show", name="user_show")
+     */
+    public function show(User $user): Response
+    {
+        return $this->render('user/show.html.twig', ['user' => $user]);
+    }
+
+    /**
      * @Route("/user/listAllUsers", name="listAllUsers")
      */
     public function listAllUsers(): Response
@@ -29,7 +37,7 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('user/list.html.twig', [
+        return $this->render('user/index.html.twig', [
             'users' => $users,
         ]);
     }
