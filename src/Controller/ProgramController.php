@@ -112,7 +112,7 @@ class ProgramController extends AbstractController
             ->getRepository(Module::class)
             ->findAll();
 
-        return $this->render('module/list.html.twig', [
+        return $this->render('module/index.html.twig', [
             'modules' => $modules,
         ]);
     }
