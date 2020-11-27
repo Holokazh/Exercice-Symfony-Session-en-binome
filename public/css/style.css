@@ -154,3 +154,9 @@ form {
 #homeDiv form input:first-child {
     width: 60%;
 }
+
+/***** TRAINING *****/
+
+.card {
+    width: 16em;
+}

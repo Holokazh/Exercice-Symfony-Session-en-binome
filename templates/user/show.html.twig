@@ -23,6 +23,12 @@
 			<p>
 				Chez V-B Formation depuis le :
 				{{ user.hiringDate | date('d/m/Y') }}</p>
+			<p>Formateur en :</p>
+			<ul>
+				{% for category in user.categories %}
+				<li><a href="{{ path('category_show', {'id':category.id}) }}">{{ category.name }}</a></li>
+				{% endfor %}
+			</ul>
 		</div>
 	</div>
 	<a href="{{ path('user_changePassword', {'id':user.id}) }}" class="btn btn-secondary btn-changePassword">Changer votre mot de passe</a>
