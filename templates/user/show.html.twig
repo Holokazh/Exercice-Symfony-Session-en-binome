@@ -29,6 +29,15 @@
 				<li><a href="{{ path('category_show', {'id':category.id}) }}">{{ category.name }}</a></li>
 				{% endfor %}
 			</ul>
+			<p>Rôle : 
+				{% if user.roles[0] == "ROLE_SUPER_ADMIN" %}
+				Directeur
+				{% elseif user.role == "ROLE_ADMIN" %}
+				Administrateur
+				{% else %}
+				Formateur
+				{% endif %}
+			</p>
 		</div>
 	</div>
 	<a href="{{ path('user_changePassword', {'id':user.id}) }}" class="btn btn-secondary btn-changePassword">Changer votre mot de passe</a>
