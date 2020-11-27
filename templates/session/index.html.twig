@@ -16,8 +16,10 @@
 						<th>Nombre de places</th>
 						<th>Places restantes</th>
 						<th>Détail programme</th>
-						<th>Modifier</th>
-						<th>Supprimer</th>
+						{% if is_granted('ROLE_SUPER_ADMIN') %}
+							<th>Modifier</th>
+							<th>Supprimer</th>
+						{% endif %}
 					</tr>
 				</thead>
 				<tbody>
@@ -31,12 +33,14 @@
 							<td>
 								<a href="{{ path('session_show', {'id':session.id}) }}">Détails</a>
 							</td>
-							<td>
-								<a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-info">Modifier</a>
-							</td>
-							<td>
-								<a href="{{ path('session_delete', {'id':session.id}) }}" class="btn btn-danger">Supprimer</a>
-							</td>
+							{% if is_granted('ROLE_SUPER_ADMIN') %}
+								<td>
+									<a href="{{ path('session_edit', {'id':session.id}) }}" class="btn btn-info">Modifier</a>
+								</td>
+								<td>
+									<a href="{{ path('session_delete', {'id':session.id}) }}" class="btn btn-danger">Supprimer</a>
+								</td>
+							{% endif %}
 						</tr>
 					{% endfor %}
 				</tbody>
