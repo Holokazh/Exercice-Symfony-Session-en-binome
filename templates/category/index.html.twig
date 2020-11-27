@@ -6,16 +6,16 @@
 {% block main %}
 	<div class="table-responsive containerIndex">
 		<div class="divContainerTable">
-			<a href="{{ path('category_add') }}" class="btn btn-primary btnAjout">Ajouter une catégorie</a>
+			{% if is_granted('ROLE_SUPER_ADMIN') %}
+				<a href="{{ path('category_add') }}" class="btn btn-primary btnAjout">Ajouter une catégorie</a>
+			{% endif %}
 			<table class="table">
 				<thead class="thead">
 					<tr>
 						<th>Nom de la catégorie</th>
 						<th>Détails</th>
-						{% if is_granted('ROLE_SUPER_ADMIN') %}
-							<th>Modifier</th>
-							<th>Supprimer</th>
-						{% endif %}
+						<th>Modifier</th>
+						<th>Supprimer</th>
 					</tr>
 				</thead>
 				<tbody>

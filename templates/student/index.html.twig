@@ -14,9 +14,15 @@
 						<th>Date de naissance</th>
 						<th>Ville</th>
 						<th>Adresse email</th>
-						<th>Détails</th>
-						<th>Modifier</th>
-						<th>Supprimer</th>
+						{% if is_granted('ROLE_USER') %}
+							<th>Détails</th>
+						{% endif %}
+						{% if is_granted('ROLE_ADMIN') %}
+							<th>Modifier</th>
+						{% endif %}
+						{% if is_granted('ROLE_SUPER_ADMIN') %}
+							<th>Supprimer</th>
+						{% endif %}
 					</tr>
 				</thead>
 				<tbody>
@@ -26,20 +32,26 @@
 							<td>{{ student.birthDay | date('d/m/Y') }}</td>
 							<td>{{ student.city }}</td>
 							<td>{{ student.email }}</td>
-							<td>
-								<a href="{{ path('student_show', {'id':student.id}) }}">Détails</a>
-							</td>
-							<td>
-								<a href="{{ path('student_edit', {'id':student.id}) }}" class="btn btn-info">Modifier</a>
-							</td>
-							<td>
-								<a href="{{ path('student_delete', {'id':student.id}) }}" class="btn btn-danger">Supprimer</a>
-							</td>
+							{% if is_granted('ROLE_USER') %}
+								<td>
+									<a href="{{ path('student_show', {'id':student.id}) }}">Détails</a>
+								</td>
+							{% endif %}
+							{% if is_granted('ROLE_ADMIN') %}
+								<td>
+									<a href="{{ path('student_edit', {'id':student.id}) }}" class="btn btn-info">Modifier</a>
+								</td>
+							{% endif %}
+							{% if is_granted('ROLE_SUPER_ADMIN') %}
+								<td>
+									<a href="{{ path('student_delete', {'id':student.id}) }}" class="btn btn-danger">Supprimer</a>
+								</td>
+							{% endif %}
 						</tr>
 					{% endfor %}
 				</tbody>
-			</table>
-		</div>
-
+			</tbody>
+		</table>
 	</div>
-{% endblock %}
+
+</div>{% endblock %}
