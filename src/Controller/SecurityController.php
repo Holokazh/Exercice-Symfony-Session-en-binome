@@ -127,12 +127,13 @@ class SecurityController extends AbstractController
     /**
      * @Route("/security/forgotten_password", name="app_forgotten_password")
      */
-    public function forgottenPassword(User $user = null, EntityManagerInterface $manager, Request $request, MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator): Response
+    public function forgottenPassword(User $user = null, EntityManagerInterface $manager, Request $request, MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository): Response
     {
         $form = $this->createForm(ForgottenPasswordType::class);
         $form->handleRequest($request);
         $email = $form->get('emailResetPsw')->getData();
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneByEmail($email);
+        $user = $userRepository->findOneByEmail($email);
+        var_dump($user);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($request->isMethod('POST')) {
                 $token = $tokenGenerator->generateToken();
@@ -172,12 +173,12 @@ class SecurityController extends AbstractController
     /**
      * @Route("/security/resetPassword/{token}", name="security_resetPassword")
      */
-    public function resetPassword(User $user = null, EntityManagerInterface $manager, Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
+    public function resetPassword(User $user = null, EntityManagerInterface $manager, Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository)
     {
         $form = $this->createForm(ChangePasswordType::class);
         $form->handleRequest($request);
         // Redéfinir le user
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneByResetToken($token);
+        $user = $userRepository->findOneByResetToken($token);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Revérifier si on est en méthode "POST"
