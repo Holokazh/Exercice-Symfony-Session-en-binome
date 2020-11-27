@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
@@ -44,7 +45,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-/**
+    /**
      * @Route("/session/add", name="session_add")
      * @Route("/session/{id}/edit", name="session_edit")
      */
@@ -162,11 +163,23 @@ class SessionController extends AbstractController
         return $this->render('training/show.html.twig', ['training' => $training]);
     }
 
-    /**
-     * @Route("/training/{id}/show", name="training_show")
-     */
-    public function search()
-    {
-        $form = $this->createFormBuilder()->add('search', SearchType::class)->getForm();
-    }
+    // /**
+    //  * @Route("/training/search", name="training_search" , methods={"GET","POST"})
+    //  */
+    // public function searchTraining(Request $request)
+    // {
+    //     $form = $this->createFormBuilder()->add('search', SearchType::class)->getForm();
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $data = $form->get('search')->getData();
+    //         $trainings = $this->getDoctrine()->getRepository(Training::class)->search($data);
+    //         return $this->render('training/search.html.twig', [
+    //             'trainings' => $trainings
+    //         ]);
+    //     }
+
+    //     return $this->render('home/index.html.twig', [
+    //         'form' => $form->createView()
+    //     ]);
+    // }
 }

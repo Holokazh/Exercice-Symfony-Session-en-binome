@@ -39,8 +39,8 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/add", name="student_add")
-     * @Route("/student/{id}/edit", name="student_edit")
+     * @Route("/secretariat/add", name="student_add")
+     * @Route("/secretariat/{id}/edit", name="student_edit")
      */
     public function new_update(Student $student = null, Request $request, EntityManagerInterface $manager)
     {
