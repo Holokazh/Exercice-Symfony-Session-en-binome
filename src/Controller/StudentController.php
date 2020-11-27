@@ -15,17 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class StudentController extends AbstractController
 {
     /**
-     * @Route("/student", name="student")
-     */
-    public function index(): Response
-    {
-        return $this->render('student/index.html.twig', [
-            'controller_name' => 'StudentController',
-        ]);
-    }
-
-    /**
-     * @Route("/student/listAllStudents", name="listAllStudents")
+     * @Route("/trainer/student/listAllStudents", name="listAllStudents")
      */
     public function listAllStudents(): Response
     {
@@ -39,8 +29,8 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/secretariat/add", name="student_add")
-     * @Route("/secretariat/{id}/edit", name="student_edit")
+     * @Route("/secretariat/student/add", name="student_add")
+     * @Route("/secretariat/student/{id}/edit", name="student_edit")
      */
     public function new_update(Student $student = null, Request $request, EntityManagerInterface $manager)
     {
@@ -66,7 +56,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/{id}/delete", name="student_delete")
+     * @Route("/directors/student/{id}/delete", name="student_delete")
      */
     public function deletestudent(Student $student = null, EntityManagerInterface $manager)
     {
@@ -77,7 +67,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/{id}/show", name="student_show")
+     * @Route("/trainer/student/{id}/show", name="student_show")
      */
     public function show(Student $student): Response
     {

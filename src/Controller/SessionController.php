@@ -22,16 +22,6 @@ class SessionController extends AbstractController
     /////-- SESSION --/////
 
     /**
-     * @Route("/session", name="session")
-     */
-    public function index(): Response
-    {
-        return $this->render('session/index.html.twig', [
-            'controller_name' => 'SessionController',
-        ]);
-    }
-
-    /**
      * @Route("/session/listAllSessions", name="listAllSessions")
      */
     public function listAllSessions(): Response
@@ -46,8 +36,8 @@ class SessionController extends AbstractController
     }
 
     /**
-     * @Route("/session/add", name="session_add")
-     * @Route("/session/{id}/edit", name="session_edit")
+     * @Route("/directors/session/add", name="session_add")
+     * @Route("/directors/session/{id}/edit", name="session_edit")
      */
     public function new_updateSession(Session $session = null, Request $request, EntityManagerInterface $manager)
     {
@@ -73,7 +63,7 @@ class SessionController extends AbstractController
     }
 
     /**
-     * @Route("/session/{id}/delete", name="session_delete")
+     * @Route("/directors/session/{id}/delete", name="session_delete")
      */
     public function deleteSession(Session $session = null, EntityManagerInterface $manager)
     {
@@ -94,16 +84,6 @@ class SessionController extends AbstractController
     /////-- TRAINING --/////
 
     /**
-     * @Route("/training", name="training")
-     */
-    public function indexTraining(): Response
-    {
-        return $this->render('training/index.html.twig', [
-            'controller_name' => 'SessionController',
-        ]);
-    }
-
-    /**
      * @Route("/training/listAllTrainings", name="listAllTrainings")
      */
     public function listAllTrainings(): Response
@@ -118,8 +98,8 @@ class SessionController extends AbstractController
     }
 
     /**
-     * @Route("/training/add", name="training_add")
-     * @Route("/training/{id}/edit", name="training_edit")
+     * @Route("/directors/training/add", name="training_add")
+     * @Route("/directors/training/{id}/edit", name="training_edit")
      */
     public function new_update(Training $training = null, Request $request, EntityManagerInterface $manager)
     {
@@ -145,7 +125,7 @@ class SessionController extends AbstractController
     }
 
     /**
-     * @Route("/training/{id}/delete", name="training_delete")
+     * @Route("/directors/training/{id}/delete", name="training_delete")
      */
     public function deletetraining(Training $training = null, EntityManagerInterface $manager)
     {

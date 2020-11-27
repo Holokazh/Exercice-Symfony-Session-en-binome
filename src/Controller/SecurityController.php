@@ -24,17 +24,7 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/security", name="security")
-     */
-    public function index(): Response
-    {
-        return $this->render('security/index.html.twig', [
-            'controller_name' => 'SecurityController',
-        ]);
-    }
-
-    /**
-     * @Route("/direction/register", name="user_register")
+     * @Route("/directors/register", name="user_register")
      */
     public function register(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -56,14 +46,14 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('listAllUsers');
         }
 
-        return $this->render('user/register.html.twig', [
+        return $this->render('security/register.html.twig', [
             'formRegister' => $form->createView(),
             'title' => 'Inscription'
         ]);
     }
 
     /**
-     * @Route("/user/{id}/edit", name="user_edit")
+     * @Route("/directors/{id}/edit", name="user_edit")
      */
     public function editUser(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -133,7 +123,6 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
         $email = $form->get('emailResetPsw')->getData();
         $user = $userRepository->findOneByEmail($email);
-        var_dump($user);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($request->isMethod('POST')) {
                 $token = $tokenGenerator->generateToken();

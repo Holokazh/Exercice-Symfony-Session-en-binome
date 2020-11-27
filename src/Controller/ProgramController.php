@@ -21,17 +21,7 @@ class ProgramController extends AbstractController
     /////-- CATEGORY --/////
 
     /**
-     * @Route("/category", name="category")
-     */
-    public function index(): Response
-    {
-        return $this->render('category/index.html.twig', [
-            'controller_name' => 'ProgramController',
-        ]);
-    }
-
-    /**
-     * @Route("/category/listAllCategories", name="listAllCategories")
+     * @Route("/directors/category/listAllCategories", name="listAllCategories")
      */
     public function listAllCategories(): Response
     {
@@ -45,8 +35,8 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/category/add", name="category_add")
-     * @Route("/category/{id}/edit", name="category_edit")
+     * @Route("/directors/category/add", name="category_add")
+     * @Route("/directors/category/{id}/edit", name="category_edit")
      */
     public function new_update(Category $category = null, Request $request, EntityManagerInterface $manager)
     {
@@ -72,7 +62,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/category/{id}/delete", name="category_delete")
+     * @Route("/directors/category/{id}/delete", name="category_delete")
      */
     public function deleteCategory(Category $category = null, EntityManagerInterface $manager)
     {
@@ -83,7 +73,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/category/{id}/show", name="category_show")
+     * @Route("/directors/category/{id}/show", name="category_show")
      */
     public function show(Category $category): Response
     {
@@ -94,17 +84,7 @@ class ProgramController extends AbstractController
     /////-- MODULE --/////
 
     /**
-     * @Route("/module", name="module")
-     */
-    public function indexModule(): Response
-    {
-        return $this->render('module/index.html.twig', [
-            'controller_name' => 'ProgramController',
-        ]);
-    }
-
-    /**
-     * @Route("/module/listAllModules", name="listAllModules")
+     * @Route("/directors/module/listAllModules", name="listAllModules")
      */
     public function listAllModules(): Response
     {
@@ -118,8 +98,8 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/module/add", name="module_add")
-     * @Route("/module/{id}/edit", name="module_edit")
+     * @Route("/directors/module/add", name="module_add")
+     * @Route("/directors/module/{id}/edit", name="module_edit")
      */
     public function new_updateModule(Module $module = null, Request $request, EntityManagerInterface $manager)
     {
@@ -145,7 +125,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/module/{id}/delete", name="module_delete")
+     * @Route("/directors/module/{id}/delete", name="module_delete")
      */
     public function deleteModule(Module $module = null, EntityManagerInterface $manager)
     {
