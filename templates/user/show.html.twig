@@ -26,16 +26,20 @@
 			<p>Formateur en :</p>
 			<ul>
 				{% for category in user.categories %}
-				<li><a href="{{ path('category_show', {'id':category.id}) }}">{{ category.name }}</a></li>
+					<li>
+						<a href="{{ path('category_show', {'id':category.id}) }}">{{ category.name }}</a>
+					</li>
 				{% endfor %}
 			</ul>
-			<p>Rôle : 
+			<p>Statut :
 				{% if user.roles[0] == "ROLE_SUPER_ADMIN" %}
-				Directeur
+					Direction
 				{% elseif user.role == "ROLE_ADMIN" %}
-				Administrateur
+					Secrétaire
+				{% elseif user.title == "M." %}
+					Formateur
 				{% else %}
-				Formateur
+					Formatrice
 				{% endif %}
 			</p>
 		</div>
