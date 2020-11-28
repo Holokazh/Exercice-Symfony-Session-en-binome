@@ -4,10 +4,10 @@
 {% endblock %}
 
 {% block main %}
-	{# <div class="table-responsive containerIndex">
-		<div class="divContainerTable"> #}
+	<div class="table-responsive containerIndex">
+		<div class="divContainerTable">
 			<div class="container">
-			{# <table class="table">
+			<table class="table">
 				<thead class="thead">
 					<tr>
 						<th>Intitulé de la formation</th>
@@ -18,13 +18,13 @@
 						{% endif %}
 					</tr>
 				</thead>
-				<tbody> #}
+				<tbody>
 				<div class="row">
 					<a href="{{ path('training_add') }}" class="btn btn-primary btnAjout">Ajouter une formation</a>
 				</div>
 				<div class="row">
 					{% for training in trainings %}
-						{# <tr>
+						<tr>
 							<td>{{ training.name }}</td>
 							<td>
 								<a href="{{ path('training_show', {'id':training.id}) }}">Voir les prochaines sessions</a>
@@ -41,9 +41,9 @@
 						</tr>
 					{% endfor %}
 				</div>
-				{# </tbody>
-			</table> #}
+				</tbody>
+			</table>
 			</div>
-		{# </div>
-	</div> #}
+		</div>
+	</div>
 {% endblock %}
