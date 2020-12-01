@@ -31,7 +31,7 @@
 							<td>{{ session.nbSpace }}</td>
 							<td>{{ session.nbSpace }}</td>
 							<td>
-								<a href="{{ path('session_show', {'id':session.id}) }}">Détails</a>
+								<a href="{{ path('session_show', {'id':session.id}) }}" class="btn btn-secondary btn-sm">Détails</a>
 							</td>
 							{% if is_granted('ROLE_SUPER_ADMIN') %}
 								<td>

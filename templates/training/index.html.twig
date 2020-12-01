@@ -6,44 +6,44 @@
 {% block main %}
 	<div class="table-responsive containerIndex">
 		<div class="divContainerTable">
-			<div class="container">
-			<table class="table">
-				<thead class="thead">
-					<tr>
-						<th>Intitulé de la formation</th>
-						<th>Prochaine(s) session(s)</th>
-						{% if is_granted('ROLE_SUPER_ADMIN') %}
-							<th>Modifier</th>
-							<th>Supprimer</th>
-						{% endif %}
-					</tr>
-				</thead>
-				<tbody>
-				<div class="row">
-					<a href="{{ path('training_add') }}" class="btn btn-primary btnAjout">Ajouter une formation</a>
-				</div>
-				<div class="row">
-					{% for training in trainings %}
+			{# <div class="container"> #}
+				<table class="table">
+					<thead class="thead">
 						<tr>
-							<td>{{ training.name }}</td>
-							<td>
-								<a href="{{ path('training_show', {'id':training.id}) }}">Voir les prochaines sessions</a>
-							</td>
-
+							<th>Intitulé de la formation</th>
+							<th>Prochaine(s) session(s)</th>
 							{% if is_granted('ROLE_SUPER_ADMIN') %}
-								<td>
-									<a href="{{ path('training_edit', {'id':training.id}) }}" class="btn btn-info">Modifier</a>
-								</td>
-								<td>
-									<a href="{{ path('training_delete', {'id':training.id}) }}" class="btn btn-danger">Supprimer</a>
-								</td>
+								<th>Modifier</th>
+								<th>Supprimer</th>
 							{% endif %}
 						</tr>
-					{% endfor %}
-				</div>
-				</tbody>
-			</table>
-			</div>
+					</thead>
+					<tbody>
+						{# <div class="row"> #}
+							<a href="{{ path('training_add') }}" class="btn btn-primary btnAjout">Ajouter une formation</a>
+						{# </div> #}
+						{# <div class="row"> #}
+							{% for training in trainings %}
+								<tr>
+									<td>{{ training.name }}</td>
+									<td>
+										<a href="{{ path('training_show', {'id':training.id}) }}" class="btn btn-secondary btn-sm">Voir les prochaines sessions</a>
+									</td>
+
+									{% if is_granted('ROLE_SUPER_ADMIN') %}
+										<td>
+											<a href="{{ path('training_edit', {'id':training.id}) }}" class="btn btn-info">Modifier</a>
+										</td>
+										<td>
+											<a href="{{ path('training_delete', {'id':training.id}) }}" class="btn btn-danger">Supprimer</a>
+										</td>
+									{% endif %}
+								</tr>
+							{% endfor %}
+						{# </div> #}
+					</tbody>
+				</table>
+			{# </div> #}
 		</div>
 	</div>
 {% endblock %}
