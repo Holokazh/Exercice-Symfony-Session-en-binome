@@ -14,10 +14,9 @@ class TrainingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Nom', TextType::class)
-            ->add('Description', TextType::class)
-            ->add('Valider', SubmitType::class)
-        ;
+            ->add('name', TextType::class)
+            ->add('description', TextType::class)
+            ->add('valider', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
