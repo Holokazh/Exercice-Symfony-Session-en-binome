@@ -4,30 +4,30 @@
 {% endblock %}
 
 {% block main %}
-	<div>
+	<div class="div-panel-admin">
 		{% if is_granted('ROLE_ADMIN') %}
 			<p>
-				<a href="{{ path('listAllStudents') }}">Liste des stagiaires</a>
+				<a href="{{ path('listAllStudents') }}" class="btn btn-secondary">Liste des stagiaires</a>
 			</p>
 			<p>
-				<a href="{{ path('student_add') }}">Ajouter un stagiaire</a>
+				<a href="{{ path('student_add') }}" class="btn btn-secondary">Ajouter un stagiaire</a>
 			</p>
 		{% endif %}
 		{% if is_granted('ROLE_SUPER_ADMIN') %}
 			<p>
-				<a href="{{ path('listAllCategories') }}">Liste des catégories</a>
+				<a href="{{ path('listAllCategories') }}" class="btn btn-secondary">Liste des catégories</a>
 			</p>
 			<p>
-				<a href="{{ path('listAllModules') }}">Liste des modules</a>
+				<a href="{{ path('listAllModules') }}" class="btn btn-secondary">Liste des modules</a>
 			</p>
 			<p>
-				<a href="{{ path('listAllUsers') }}">Liste des utilisateurs</a>
+				<a href="{{ path('listAllUsers') }}" class="btn btn-secondary">Liste des utilisateurs</a>
 			</p>
 			<p>
-				<a href="{{ path('user_register') }}">Ajouter un utilisateur</a>
+				<a href="{{ path('user_register') }}" class="btn btn-secondary">Ajouter un utilisateur</a>
 			</p>
 			<p>
-				<a href="{{ path('app_forgotten_password') }}">Test envoi de mail</a>
+				<a href="{{ path('app_forgotten_password') }}" class="btn btn-secondary">Test envoi de mail</a>
 			</p>
 		{% endif %}
 	</div>

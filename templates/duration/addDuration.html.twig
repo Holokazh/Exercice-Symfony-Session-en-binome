@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+    <h2>{{training.name}}</h2>
+
+    {{form_start(formModuleToTraining)}}
+
+        <ul id="manageDurations"
+        data-prototype="{{ form_row(formModuleToTraining.durations.vars.prototype)|e }}">
+        
+     
+    {% for module in formModuleToTraining.durations %}
+
+        <li class="manageDuration">
+            
+            {{ form_row(module) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    {{ form_row(formModuleToTraining.valider) }}
+
+    {{ form_end(formModuleToTraining) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}    
+    <script src="/js/collectionHandlerDuree.js"></script>
+{% endblock %}

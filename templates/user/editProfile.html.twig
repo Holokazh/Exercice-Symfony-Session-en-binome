@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{# {% block title %}
+{% endblock %} #}
+
+{% block main %}
+	<a href="{{ path('user_show', {'id':app.user.id}) }}">Retour<a>
+
+			<h1>Modifier son profil</h1>
+			{{ form(formEditProfile) }}{% endblock %}

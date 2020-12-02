@@ -6,21 +6,23 @@
 
 {% block main %}
 	<div class="table-responsive">
-		<table class="table tableShow">
-			<thead class="thead">
-				<tr>
-					<th>{{ category.name }}</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				{% for module in category.modules %}
+		<div class="divContainerTable">
+			<table class="table tableShow">
+				<thead class="thead">
 					<tr>
-						<td>{{ module }}</td>
+						<th>{{ category.name }}</th>
 					</tr>
-				{% endfor %}
+				</thead>
+				<tbody>
 
-			</tbody>
-		</table>
+					{% for module in category.modules %}
+						<tr>
+							<td>{{ module }}</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
 	</div>
 {% endblock %}

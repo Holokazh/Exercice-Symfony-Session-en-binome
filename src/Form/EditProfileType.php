@@ -11,30 +11,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Validator\Constraints\Length;
 
-class RegisterType extends AbstractType
+class EditProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('email', EmailType::class, ['label' => 'Adresse email'])
-            // ->add('roles')
-            ->add('password', RepeatedType::class, [
-                'type'              => PasswordType::class,
-                'mapped'            => false,
-                'first_options'     => array('label' => 'Mot de passe'),
-                'second_options'    => array('label' => 'Confirmation du mot de passe'),
-                'invalid_message' => 'Erreur de la confirmation du mot de passe.',
-                'constraints' => new Length([
-                    'min' => 8,
-                    'minMessage' => "Veuillez mettre plus de {{ limit }} caractère(s)",
-                    'max' => 15,
-                    'maxMessage' => 'Veuillez mettre moins de {{ limit }} caractère(s)'
-                ])
-            ])
             ->add('title', ChoiceType::class, [
                 'choices' => [
                     'M.' => 'M.',
@@ -52,24 +35,6 @@ class RegisterType extends AbstractType
             ->add('avatar', TextType::class, ['label' => 'Image de profil'])
             ->add('hiringDate', DateType::class, ['label' => 'Date d\'entrée chez V-B Formation', 'format' => 'ddMMyyyy', 'years' => range(date("Y"), date("Y") - 120)])
             // ->add('categories', ChoiceType::class, ['label' => 'Catégorie'])
-            // ->add('roles', ChoiceType::class, [
-            //     'attr' => ['class' => 'form-control selectpicker',],
-            //     'choices' => [
-            //         'Direction' => 'ROLE_SUPER_ADMIN',
-            //         'Secrétaire' => 'ROLE_ADMIN',
-            //         'Formateur' => 'ROLE_USER'
-            //     ],
-            //     'expanded' => true,
-            //     'label' => 'Rôle'
-            // ])
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Formateur' => 'ROLE_USER',
-                    'Secretaire' => 'ROLE_ADMIN',
-                    'Direction' => 'ROLE_SUPER_ADMIN'
-                ],
-                'multiple' => true,
-            ])
             ->add('valider', SubmitType::class);
     }
 

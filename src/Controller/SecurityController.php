@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\EditUserType;
 use App\Form\RegisterType;
 
+use App\Form\EditProfileType;
 use App\Form\ChangePasswordType;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
@@ -77,6 +78,28 @@ class SecurityController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'formEditUser' => $form->createView(),
             'title' => 'Modifier un utilisateur'
+        ]);
+    }
+
+    /**
+     * @Route("/trainer/{id}/edit", name="profile_edit")
+     */
+    public function editProfile(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
+    {
+
+        $form = $this->createForm(EditProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('listAllUsers');
+        }
+
+        return $this->render('user/editProfile.html.twig', [
+            'formEditProfile' => $form->createView(),
+            'title' => 'Modifier votre profil'
         ]);
     }
 

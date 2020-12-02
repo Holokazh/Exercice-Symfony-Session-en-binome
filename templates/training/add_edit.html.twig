@@ -9,7 +9,7 @@
 {% block main %}
 <a href="{{ path('listAllTrainings') }}">Retour<a>
     
-<h1>{{ text }} <span>{{ 'Formation ' ~ training.name }}</span></h1>
+<h1>{{ text }} <span>{{ "Formation " ~ training }}</span></h1>
 {{ form(formTraining) }}
 
 {% endblock %}
