@@ -111,6 +111,10 @@ table tr:nth-child(even) {
     background-color: #bebebe;
 }
 
+.del_collection_link {
+    margin-bottom: 0.5em;
+}
+
 /***** FORM ADD AND EDIT *****/
 
 form {

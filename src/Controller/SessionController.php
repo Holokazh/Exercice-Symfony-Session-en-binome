@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Entity\Training;
-use App\Form\SessionType;
+use App\Form\ModulesType;
 
+use App\Form\SessionType;
 use App\Form\TrainingType;
 use App\Repository\SessionRepository;
 use App\Repository\TrainingRepository;
@@ -141,6 +142,28 @@ class SessionController extends AbstractController
     public function show(Training $training): Response
     {
         return $this->render('training/show.html.twig', ['training' => $training]);
+    }
+
+    /**
+     * @Route("/directors/training/addDuration/{id}", name="add_duration")
+     */
+    public function addModuleToTraining(Training $training, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(ModulesType::class, $training);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($training);
+            $manager->flush();
+
+            return $this->redirectToRoute('listAllTrainings');
+        }
+
+        return $this->render('duration/addDuration.html.twig', [
+            'formModuleToTraining' => $form->createView(),
+            'training' => $training
+        ]);
     }
 
     // /**

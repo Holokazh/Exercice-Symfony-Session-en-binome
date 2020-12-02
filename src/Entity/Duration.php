@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\DurationRepository;
+use App\Entity\Module;
+use App\Entity\Training;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DurationRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=DurationRepository::class)
@@ -79,6 +81,6 @@ class Duration
     ///// METHODE MAGIQUE __toString /////
     public function __toString()
     {
-        return $this->getNbDay();
+        return $this->getModule() . ' : ' . $this->getNbDay() . ' jour(s)';
     }
 }
