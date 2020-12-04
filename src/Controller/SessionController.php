@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Session;
+
 use App\Entity\Training;
 use App\Form\ModulesType;
-
 use App\Form\SessionType;
 use App\Form\TrainingType;
 use App\Repository\SessionRepository;
@@ -185,4 +187,36 @@ class SessionController extends AbstractController
     //         'form' => $form->createView()
     //     ]);
     // }
+
+    /**
+     * @Route("/training/details_training_pdf", name="training_details_pdf")
+     */
+    public function generate_pdf()
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->render('training/details_pdf.html.twig', [
+            'title' => "Test PDF"
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("testpdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
 }

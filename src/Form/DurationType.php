@@ -16,7 +16,6 @@ class DurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbDay', IntegerType::class)
             ->add('module', EntityType::class, [
                 'class' => Module::class,
                 'label' => 'Module',
@@ -24,7 +23,8 @@ class DurationType extends AbstractType
                     return $er->createQueryBuilder('m')
                         ->orderBy('m.name', 'ASC');
                 }
-            ]);
+            ])
+            ->add('nbDay', IntegerType::class, ['label' => 'Durée en jour(s)']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

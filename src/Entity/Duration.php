@@ -26,13 +26,13 @@ class Duration
     private $nbDay;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="durations")
+     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="durations", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $module;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Training::class, inversedBy="durations")
+     * @ORM\ManyToOne(targetEntity=Training::class, inversedBy="durations", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $training;

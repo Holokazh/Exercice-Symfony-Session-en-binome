@@ -36,7 +36,7 @@ class Training
     private $sessions;
 
     /**
-     * @ORM\OneToMany(targetEntity=Duration::class, mappedBy="training", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Duration::class, mappedBy="training", orphanRemoval=true, cascade={"persist"})
      */
     private $durations;
 
