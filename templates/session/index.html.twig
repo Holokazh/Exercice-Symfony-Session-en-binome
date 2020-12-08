@@ -10,6 +10,7 @@
 			<table class="table">
 				<thead class="thead">
 					<tr>
+						<th>Nom formation</th>
 						<th>Date de début</th>
 						<th>Date de fin</th>
 						<th>Durée (en mois)</th>
@@ -25,11 +26,12 @@
 				<tbody>
 					{% for session in sessions %}
 						<tr>
+							<td>{{ session.training.name }}</td>
 							<td>{{ session.dateStart | date('d/m/Y') }}</td>
 							<td>{{ session.dateEnd | date('d/m/Y') }}</td>
 							<td>{{ session.getDuration }}</td>
 							<td>{{ session.nbSpace }}</td>
-							<td>{{ session.nbSpace }}</td>
+							<td>{{ session.nbSpace - session.students|length }}</td>
 							<td>
 								<a href="{{ path('session_show', {'id':session.id}) }}" class="btn btn-secondary btn-sm">Détails</a>
 							</td>
