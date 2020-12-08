@@ -52,16 +52,6 @@ class RegisterType extends AbstractType
             ->add('avatar', TextType::class, ['label' => 'Image de profil'])
             ->add('hiringDate', DateType::class, ['label' => 'Date d\'entrée chez V-B Formation', 'format' => 'ddMMyyyy', 'years' => range(date("Y"), date("Y") - 120)])
             // ->add('categories', ChoiceType::class, ['label' => 'Catégorie'])
-            // ->add('roles', ChoiceType::class, [
-            //     'attr' => ['class' => 'form-control selectpicker',],
-            //     'choices' => [
-            //         'Direction' => 'ROLE_SUPER_ADMIN',
-            //         'Secrétaire' => 'ROLE_ADMIN',
-            //         'Formateur' => 'ROLE_USER'
-            //     ],
-            //     'expanded' => true,
-            //     'label' => 'Rôle'
-            // ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Formateur' => 'ROLE_USER',
