@@ -108,25 +108,35 @@ class SecurityController extends AbstractController
      */
     public function changePassword(User $user = null, EntityManagerInterface $manager, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        // On instancie la variable $form par le formulaire "ChangePasswordType"
         $form = $this->createForm(ChangePasswordType::class, $user);
-        // $formOldPsw = $form->get('oldPassword')->getData();
+        // La fonction handleRequest nous permet de traiter les données du formulaire
         $form->handleRequest($request);
 
+        // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
+            // On instancie $oldPassword par ce que l'utilisateur a inscrit dans le champ "oldPassword" du formulaire
             $oldPassword = $form->get('oldPassword')->getData();
+            // Si $oldPassword est valide (La fonction isPasswordValid compare le mot de passe hashé par celui dans la base de donnée )
             if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
 
+                // On instancie $newPassword par ce que l'utilisateur a inscrit dans le champ "newPassword" du formulaire
                 $newPassword = $form->get('newPassword')->getData();
+                // On utilise la fonction setPassword sur le user afin de lui définir le nouveau mot de passe
                 $user->setPassword(
+                    // On encode le mot de passe
                     $passwordEncoder->encodePassword(
                         $user,
                         $newPassword
                     )
                 );
 
+                // La fonction flush permet d'enregistrer dans la base de données tous les changements apportés aux objets qui ont été mis en file d'attente jusqu'à présent.
                 $manager->flush();
+                // La fonction addFlash permet d'ecrire un message simple et rapide
                 $this->addFlash('info', 'Votre mot de passe a bien été changé !');
 
+                // Si tout est bon, on redirige l'utilisateur vers la route qui mène à la liste des utilisateurs
                 return $this->redirectToRoute('listAllUsers');
             }
         }
@@ -142,25 +152,36 @@ class SecurityController extends AbstractController
      */
     public function forgottenPassword(User $user = null, EntityManagerInterface $manager, Request $request, MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository): Response
     {
+        // On instancie la variable $form par le formulaire "ForgottenPasswordType"
         $form = $this->createForm(ForgottenPasswordType::class);
+        // On traite les données du formulaire
         $form->handleRequest($request);
+        // On récupère la valeur du champ 'emailResetPsw'
         $email = $form->get('emailResetPsw')->getData();
+        // $user prend la valeur du user ayant la valeur de la variable $email
         $user = $userRepository->findOneByEmail($email);
+        // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
+            // Si la requète est une méthode POST
             if ($request->isMethod('POST')) {
+                // On génère un token unique
                 $token = $tokenGenerator->generateToken();
                 try {
+                    // On esssaye d'instancier le token dans la propriété reset_token du user
                     $user->setResetToken($token);
+                    // On enregistre dans la base de données tous les changements apportés aux objets qui ont été mis en file d'attente jusqu'à présent
                     $manager->flush();
                 } catch (\Exception $e) {
+                    // Si l'on arrive pas à instancier le token dans la propriété reset_token du user, on attrape l'erreur en l'affichant dans un add_flash
                     $this->addFlash('Warning', $e->getMessage());
+                    // On redirige l'utilisateur vers l'espace de connexion
                     return $this->redirectToRoute('app_login');
                 }
 
+                // On génère une URL comportant la route permettant de réinitialiser le mot de passe
                 $url = $this->generateUrl('security_resetPassword', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
-
-
+                // On envoie le mail automatiquement
                 $message = (new Email())
                     ->from('vb.formation68@gmail.com')
                     ->to($user->getEmail())
@@ -170,12 +191,12 @@ class SecurityController extends AbstractController
 
                 $mailer->send($message);
 
-                // return $this->redirectToRoute('app_login');
+                // On affiche avec un addFlash l'envoi du mail avec succès
                 $this->addFlash('info', 'Le mail de récupération de mot de passe a bien été envoyé, vous pouvez aller le consulter.');
-
             }
         }
 
+        // On retorune la vue, ainsi qu'un tableau de données
         return $this->render('security/forgottenPassword.html.twig', [
             'formForgottenPassword' => $form->createView(),
             'title' => 'Réinitialisation de mot de passe'
@@ -206,7 +227,7 @@ class SecurityController extends AbstractController
                         $newPassword
                     )
                 );
-                
+
                 $manager->flush();
                 $this->addFlash('info', 'Votre mot de passe a bien été changé !');
 
