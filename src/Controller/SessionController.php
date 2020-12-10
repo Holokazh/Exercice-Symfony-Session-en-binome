@@ -168,25 +168,25 @@ class SessionController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/training/search", name="training_search" , methods={"GET","POST"})
-    //  */
-    // public function searchTraining(Request $request)
-    // {
-    //     $form = $this->createFormBuilder()->add('search', SearchType::class)->getForm();
-    //     $form->handleRequest($request);
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $data = $form->get('search')->getData();
-    //         $trainings = $this->getDoctrine()->getRepository(Training::class)->search($data);
-    //         return $this->render('training/search.html.twig', [
-    //             'trainings' => $trainings
-    //         ]);
-    //     }
+    /**
+     * @Route("/training/search", name="training_search" , methods={"GET","POST"})
+     */
+    public function searchTraining(Request $request, TrainingRepository $trainingRepository)
+    {
+        $form = $this->createFormBuilder()->add('search', SearchType::class)->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->get('search')->getData();
+            $trainings = $this->$trainingRepository->search($data);
+            return $this->render('training/search.html.twig', [
+                'trainings' => $trainings
+            ]);
+        }
 
-    //     return $this->render('home/index.html.twig', [
-    //         'form' => $form->createView()
-    //     ]);
-    // }
+        return $this->render('home/index.html.twig', [
+            'formSearchTraining' => $form->createView()
+        ]);
+    }
 
     /**
      * @Route("/training/details_training_pdf", name="training_details_pdf")
