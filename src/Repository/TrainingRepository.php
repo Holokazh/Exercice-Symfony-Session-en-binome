@@ -49,12 +49,21 @@ class TrainingRepository extends ServiceEntityRepository
     }
     */
 
+    // public function search($search)
+    // {
+    //     return $this->createQueryBuilder('t')
+    //         ->where('t.name = :val')
+    //         ->setParameter('val', $search)
+    //         ->orderBy('t.name', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
     public function search($search)
     {
-        return $this->createQueryBuilder('t')
-            ->where('t.name = :val')
-            ->setParameter('val', $search)
-            ->orderBy('t.name', 'ASC')
+        return $this->createQueryBuilder('Training')
+            ->andWhere('Training.name LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
             ->getQuery()
             ->getResult();
     }

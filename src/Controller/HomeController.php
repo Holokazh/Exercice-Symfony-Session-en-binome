@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Training;
+use App\Form\SearchTrainingType;
 use App\Repository\TrainingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,16 +14,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home" , methods={"GET","POST"})
+     * @Route("/", name="home")
      */
     public function searchTraining(Request $request, TrainingRepository $trainingRepository)
     {
-        $form = $this->createFormBuilder()->add('search', SearchType::class, ['label' => 'Recherche'])->getForm();
+        $form = $this->createForm(SearchTrainingType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $trainings = $trainingRepository->search($data['search']);
-            var_dump($trainings);
+            $data = $form->get('name')->getData();
+            $trainings = $trainingRepository->search($data);
             return $this->render('training/search.html.twig', [
                 'trainings' => $trainings
             ]);

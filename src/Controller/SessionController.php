@@ -10,6 +10,7 @@ use App\Entity\Training;
 use App\Form\ModulesType;
 use App\Form\SessionType;
 use App\Form\TrainingType;
+use App\Form\SearchTrainingType;
 use App\Repository\SessionRepository;
 use App\Repository\TrainingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -165,26 +166,6 @@ class SessionController extends AbstractController
         return $this->render('duration/addDuration.html.twig', [
             'formModuleToTraining' => $form->createView(),
             'training' => $training
-        ]);
-    }
-
-    /**
-     * @Route("/training/search", name="training_search" , methods={"GET","POST"})
-     */
-    public function searchTraining(Request $request, TrainingRepository $trainingRepository)
-    {
-        $form = $this->createFormBuilder()->add('search', SearchType::class)->getForm();
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->get('search')->getData();
-            $trainings = $this->$trainingRepository->search($data);
-            return $this->render('training/search.html.twig', [
-                'trainings' => $trainings
-            ]);
-        }
-
-        return $this->render('home/index.html.twig', [
-            'formSearchTraining' => $form->createView()
         ]);
     }
 
