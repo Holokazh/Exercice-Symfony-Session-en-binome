@@ -19,6 +19,7 @@ class TrainingRepository extends ServiceEntityRepository
         parent::__construct($registry, Training::class);
     }
 
+
     // /**
     //  * @return Training[] Returns an array of Training objects
     //  */
@@ -26,12 +27,12 @@ class TrainingRepository extends ServiceEntityRepository
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        ->andWhere('t.exampleField = :val')
+        ->setParameter('val', $value)
+        ->orderBy('t.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
         ;
     }
     */
@@ -40,11 +41,30 @@ class TrainingRepository extends ServiceEntityRepository
     public function findOneBySomeField($value): ?Training
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        ->andWhere('t.exampleField = :val')
+        ->setParameter('val', $value)
+        ->getQuery()
+        ->getOneOrNullResult()
         ;
     }
     */
+
+    // public function search($search)
+    // {
+    //     return $this->createQueryBuilder('t')
+    //         ->where('t.name = :val')
+    //         ->setParameter('val', $search)
+    //         ->orderBy('t.name', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+    public function search($search)
+    {
+        return $this->createQueryBuilder('Training')
+            ->andWhere('Training.name LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getResult();
+    }
 }

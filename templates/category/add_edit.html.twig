@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
+
+{% block title %}
+{{ text }} catégorie
+{% endblock %}
+
+{% block main %}
+<a href="{{ path('listAllCategories') }}">Retour<a>
+    
+<h1>{{ text }} catégorie</h1>
+{{ form(formCategory) }}
+
+{% endblock %}

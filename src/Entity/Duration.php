@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\DurationRepository;
+use App\Entity\Module;
+use App\Entity\Training;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DurationRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=DurationRepository::class)
@@ -23,13 +26,13 @@ class Duration
     private $nbDay;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="durations")
+     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="durations", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $module;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Training::class, inversedBy="durations")
+     * @ORM\ManyToOne(targetEntity=Training::class, inversedBy="durations", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $training;
@@ -73,5 +76,11 @@ class Duration
         $this->training = $training;
 
         return $this;
+    }
+
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->getModule() . ' : ' . $this->getNbDay() . ' jour(s)';
     }
 }

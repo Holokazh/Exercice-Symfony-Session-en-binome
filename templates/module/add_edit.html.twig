@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
+
+{% block title %}
+{{ text }} {{module.name}}
+{% endblock %}
+
+{% block main %}
+<a href="{{ path('listAllModules') }}">Retour<a>
+    
+<h1>{{ text }} <span>{{ 'Module ' ~ module.name }}</span></h1>
+{{ form(formModule) }}
+
+{% endblock %}

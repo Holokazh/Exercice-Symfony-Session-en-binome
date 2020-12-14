@@ -1,0 +1,183 @@
+/***** BASE.HTML.TWIG *****/
+
+/***** GLOBALS SETTINGS *****/
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background-color: #cecece;
+    margin-bottom: 250px;
+}
+
+nav, footer {
+    background-color: #1f9bcf;
+}
+
+header *, footer * {
+    color: #333 !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+header a:hover, footer a:hover {
+    color: #F6F6F6 !important;
+}
+
+/***** NAVIGATION BAR *****/
+
+.navbar-brand, h1 {
+    font-weight: bold;
+}
+
+nav>.nav-link {
+    font-weight: bold;
+    margin-left: 5rem;
+}
+
+.btn-connected {
+    margin-left: 0 !important;
+}
+
+/***** FOOTER *****/
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 250px;
+}
+
+footer .container {
+    margin: 3em auto;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+footer a {
+    display: block;
+}
+
+.divFooter {
+    text-align: center;
+}
+
+.divFooterCenter a {
+    margin-bottom: 1.5em;
+}
+
+/***** VIEW LIST *****/
+
+.divContainerTable {
+    margin: 5em 0 2em 15em;
+}
+
+.table {
+    width: auto;
+    border: 1px solid #3f3f3f;
+}
+
+.thead {
+    background-color: #1f9bcf;
+}
+
+.thead th {
+    color: #F6F6F6 !important;
+}
+
+td, th {
+    text-align: center;
+}
+
+.btnAjout {
+    margin-bottom: 0.5em;
+}
+
+.fa-info-circle {
+    font-size: 2em;
+}
+
+table tr:nth-child(even) {
+    background-color: #bebebe;
+}
+
+.del_collection_link {
+    margin-bottom: 0.5em;
+}
+
+/***** FORM ADD AND EDIT *****/
+
+form {
+    width: 25%;
+    margin: 5em 0 2em 15em;
+}
+
+/***** VIEW SHOW *****/
+
+.tableShow {
+    width: 30% !important;
+}
+
+.containerShow {
+    width: 35%;
+    height: auto;
+    background-color: #1f9bcf;
+    color: #f6f6f6;
+    margin: 5em 0 2em 15em;
+    padding: 1em;
+}
+
+.containerShow p {
+    margin: 0.3em 0;
+}
+
+.btn-changePassword {
+    margin-left: 17em
+}
+
+/***** HOMEPAGE *****/
+
+#homeDiv {
+    background-color: rgba(00, 168, 255, 0.4);
+    margin: 5em 0 2em 15em;
+    display: table;
+    padding: 2em;
+    border: 1px solid #333;
+}
+
+#homeDiv form {
+    margin: 0;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#homeDiv form input:first-child {
+    width: 60%;
+}
+
+/***** TRAINING *****/
+
+.card {
+    width: 16em;
+}
+
+/***** PANEL ADMIN *****/
+
+.div-panel-admin {
+    width: 15%;
+    margin: 1em;
+}
+
+.div-panel-admin a {
+    width: 100%;
+}

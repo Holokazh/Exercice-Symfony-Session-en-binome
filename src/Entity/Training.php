@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\TrainingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -35,7 +36,7 @@ class Training
     private $sessions;
 
     /**
-     * @ORM\OneToMany(targetEntity=Duration::class, mappedBy="training", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Duration::class, mappedBy="training", orphanRemoval=true, cascade={"persist"})
      */
     private $durations;
 
@@ -72,6 +73,12 @@ class Training
         $this->description = $description;
 
         return $this;
+    }
+
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**

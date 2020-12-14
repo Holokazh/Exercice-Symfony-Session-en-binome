@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\StudentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StudentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StudentRepository::class)
@@ -31,6 +34,10 @@ class Student
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Range(min = "now -121 year",
+     * minMessage = "Veuillez entrer une date valide.",
+     * max = "now -18 year",
+     * maxMessage = "Le stagiaire doit être majeur.")
      */
     private $birthDay;
 
@@ -45,7 +52,8 @@ class Student
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(message = "L'email {{ value }} n'est pas valide.")
      */
     private $email;
 
@@ -153,6 +161,12 @@ class Student
         return $this;
     }
 
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
     /**
      * @return Collection|Session[]
      */
@@ -178,5 +192,11 @@ class Student
         }
 
         return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        $timeZone = new DateTimeZone('Europe/Paris');
+        return DateTime::createFromFormat('d/m/Y', self::getBirthDay()->format("d/m/Y"), $timeZone)->diff(new DateTime('now', $timeZone))->y;
     }
 }

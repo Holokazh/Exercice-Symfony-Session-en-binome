@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
+
+{% block title %}
+{{ text }} session
+{% endblock %}
+
+{% block main %}
+<a href="{{ path('listAllSessions') }}">Retour<a>
+    
+<h1>{{ text }} <span>{{ 'Session de ' ~ session.training ~ ' du ' ~ 
+            session.dateStart | date('d/m/Y') ~ ' au ' ~ session.dateEnd | date('d/m/Y')}}</span></h1>
+{{ form(formSession) }}
+
+{% endblock %}

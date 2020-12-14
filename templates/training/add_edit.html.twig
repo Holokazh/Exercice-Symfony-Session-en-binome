@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% set text = (editMode) ? 'Modifier' : 'Ajouter' %}
+
+{% block title %}
+{{ text }} training
+{% endblock %}
+
+{% block main %}
+<a href="{{ path('listAllTrainings') }}">Retour<a>
+    
+<h1>{{ text }} <span>{{ "Formation " ~ training }}</span></h1>
+{{ form(formTraining) }}
+
+{% endblock %}

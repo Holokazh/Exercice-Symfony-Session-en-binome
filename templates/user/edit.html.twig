@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{# {% block title %}
+{% endblock %} #}
+
+{% block main %}
+	<a href="{{ path('listAllUsers') }}">Retour<a>
+
+			<h1>Modifier un utilisateur</h1>
+			{{ form(formEditUser) }}{% endblock %}

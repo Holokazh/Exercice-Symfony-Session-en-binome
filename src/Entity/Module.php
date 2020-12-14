@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ModuleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -97,5 +98,11 @@ class Module
         }
 
         return $this;
+    }
+
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->name;
     }
 }

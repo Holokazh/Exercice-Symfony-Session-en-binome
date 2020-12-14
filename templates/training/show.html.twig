@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails
+	{{ training }}
+{% endblock %}
+
+{% block main %}
+	<p>Modules de la formation :
+		{% for module in training.durations %}
+			{{ module }}
+		{% endfor %}
+		<a href="{{ path('add_duration', {'id': training.id}) }}" class="btn btn-warning btn-sm" role="button">Modifier les modules</a>
+	</p>
+	<a href="{{ path('training_details_pdf') }}" class="btn btn-info btn-sm">Télécharger le programme de la formation</a>
+{% endblock %}

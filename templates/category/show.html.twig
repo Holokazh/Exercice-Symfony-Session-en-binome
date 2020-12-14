@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails
+	{{ category.name }}
+{% endblock %}
+
+{% block main %}
+	<div class="table-responsive">
+		<div class="divContainerTable">
+			<table class="table tableShow">
+				<thead class="thead">
+					<tr>
+						<th>{{ category.name }}</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for module in category.modules %}
+						<tr>
+							<td>{{ module }}</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

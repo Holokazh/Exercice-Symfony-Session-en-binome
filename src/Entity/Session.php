@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,16 +22,22 @@ class Session
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min = 1, 
+     * minMessage = "Il doit y avoir au moins une place.")
      */
     private $nbSpace;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan("today",
+     * message = "La date de début doit être supérieur à la date d'aujourd'hui.")
      */
     private $dateStart;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan(propertyPath = "dateStart",
+     * message = "La date de fin doit être supérieure à la date de début.")
      */
     private $dateEnd;
 
@@ -103,6 +110,12 @@ class Session
         return $this;
     }
 
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->getTraining() . ' du ' . $this->getDateStart() . ' au ' . $this->getDateEnd();
+    }
+
     /**
      * @return Collection|Student[]
      */
@@ -125,5 +138,10 @@ class Session
         $this->students->removeElement($student);
 
         return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->getDateStart()->diff($this->getDateEnd())->m;
     }
 }

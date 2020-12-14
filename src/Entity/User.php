@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -23,6 +24,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(message = "L'email {{ value }} n'est pas valide.")
      */
     private $email;
 
@@ -49,6 +51,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Range(min = "now -121 year",
+     * minMessage = "Veuillez entrer une date valide.",
+     * max = "now -18 year",
+     * maxMessage = "L'utilisateur doit être majeur.")
      */
     private $birthDay;
 
@@ -91,6 +97,12 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="users")
      */
     private $categories;
+
+    /**
+     * @var string Le token servira lors de l'oubli de mot de passe
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $resetToken;
 
     public function __construct()
     {
@@ -295,6 +307,12 @@ class User implements UserInterface
         return $this;
     }
 
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
     /**
      * @return Collection|Category[]
      */
@@ -318,6 +336,18 @@ class User implements UserInterface
         if ($this->categories->removeElement($category)) {
             $category->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,8 +22,15 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=50)
+    //  * @Assert\Length(min=3, minMessage="Votre catégorie doit comporter plus de {{ limit }} caractère(s).")
      */
     private $name;
+
+    ///// METHODE MAGIQUE __toString /////
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * @ORM\OneToMany(targetEntity=Module::class, mappedBy="Category", orphanRemoval=true)
