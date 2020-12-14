@@ -10,6 +10,7 @@
 {% block main %}
 	<div class="table-responsive">
 		<div class="divContainerTable">
+			<a href="{{ path('add_studentToSession', {'id': session.id}) }}" class="btn btn-primary btnAjout">Ajouter stagiaire(s)</a>
 			<table class="table tableShow">
 				<thead class="thead">
 					<tr>

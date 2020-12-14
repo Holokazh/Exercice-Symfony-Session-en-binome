@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+    {# <h2>{{session.name}}</h2> #}
+
+    {{form_start(formStudentToSession)}}
+
+        <ul id="manageStudents"
+        data-prototype="{{ form_row(formStudentToSession.students.vars.prototype)|e }}">
+        
+     
+    {% for student in formStudentToSession.students %}
+
+        <li class="manageStudent">
+            
+            {{ form_row(student) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    {{ form_row(formStudentToSession.valider) }}
+
+    {{ form_end(formStudentToSession) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}    
+    <script src="/js/collectionHandlerSession.js"></script>
+{% endblock %}

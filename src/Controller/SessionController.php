@@ -6,9 +6,11 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Session;
 
+use App\Entity\Student;
 use App\Entity\Training;
 use App\Form\ModulesType;
 use App\Form\SessionType;
+use App\Form\StudentsType;
 use App\Form\TrainingType;
 use App\Form\SearchTrainingType;
 use App\Repository\SessionRepository;
@@ -85,7 +87,29 @@ class SessionController extends AbstractController
         return $this->render('session/show.html.twig', ['session' => $session]);
     }
 
-    /////-- TRAINING --/////
+    /**
+     * @Route("/directors/student/addStudentToSession/{id}", name="add_studentToSession")
+     */
+    public function addStudentToSession(Session $session, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(StudentsType::class, $session);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($session);
+            $manager->flush();
+
+            return $this->redirectToRoute('listAllStudents');
+        }
+
+        return $this->render('student/addStudentToSession.html.twig', [
+            'formStudentToSession' => $form->createView(),
+            'session' => $session
+        ]);
+    }
+
+    /////->-> TRAINING <-<-/////
 
     /**
      * @Route("/training/listAllTrainings", name="listAllTrainings")
