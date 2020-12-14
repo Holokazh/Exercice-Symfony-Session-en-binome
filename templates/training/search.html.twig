@@ -1,7 +1,29 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des formations
+{% endblock %}
 
 {% block main %}
-	{% for training in trainings %}
-		<p>{{ training.name }}</p>
-	{% endfor %}
+
+	<div class="table-responsive containerIndex">
+		<div class="divContainerTable">
+			<table>
+				<thead>
+					<tr>
+						<th>Résultats de vos recherches</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					{% for training in trainings %}
+						<tr>
+							<td>
+								<a href="{{ path('training_show', {'id':training.id}) }}" class="btn btn-outline-primary btn-sm">{{ training.name }}</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}

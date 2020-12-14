@@ -100,7 +100,7 @@ class SessionController extends AbstractController
             $manager->persist($session);
             $manager->flush();
 
-            return $this->redirectToRoute('listAllStudents');
+            return $this->redirectToRoute('listAllSessions');
         }
 
         return $this->render('student/addStudentToSession.html.twig', [

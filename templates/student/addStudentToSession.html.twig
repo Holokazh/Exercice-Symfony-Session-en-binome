@@ -2,29 +2,28 @@
 
 
 {% block main %}
-    {# <h2>{{session.name}}</h2> #}
+	<h2>{{'Session ' ~ session.training ~ ' du ' ~ session.dateStart | date('d/m/Y') ~ ' au ' ~ session.dateEnd | date('d/m/Y')}}</h2>
 
-    {{form_start(formStudentToSession)}}
+	{{form_start(formStudentToSession)}}
 
-        <ul id="manageStudents"
-        data-prototype="{{ form_row(formStudentToSession.students.vars.prototype)|e }}">
-        
-     
-    {% for student in formStudentToSession.students %}
+	<ul id="manageStudents" data-prototype="{{ form_row(formStudentToSession.students.vars.prototype)|e }}">
 
-        <li class="manageStudent">
-            
-            {{ form_row(student) }}
-        </li>
-    {% endfor %}
-    </ul>
 
-    {{ form_row(formStudentToSession.valider) }}
+		{% for student in formStudentToSession.students %}
 
-    {{ form_end(formStudentToSession) }}
+			<li class="manageStudent">
+
+				{{ form_row(student) }}
+			</li>
+		{% endfor %}
+	</ul>
+
+	{{ form_row(formStudentToSession.valider) }}
+
+	{{ form_end(formStudentToSession) }}
 {% endblock %}
 
 {% block javascripts %}
-    {{parent()}}    
-    <script src="/js/collectionHandlerSession.js"></script>
+	{{parent()}}
+	<script src="/js/collectionHandlerSession.js"></script>
 {% endblock %}

@@ -115,6 +115,10 @@ table tr:nth-child(even) {
     margin-bottom: 0.5em;
 }
 
+h2 {
+    margin: 1em;
+}
+
 /***** FORM ADD AND EDIT *****/
 
 form {
