@@ -22,6 +22,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use CalendarBundle\CalendarEvents;
+use CalendarBundle\Entity\Event;
+use CalendarBundle\Event\CalendarEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
 class SessionController extends AbstractController
 {
 
@@ -107,6 +112,14 @@ class SessionController extends AbstractController
             'formStudentToSession' => $form->createView(),
             'session' => $session
         ]);
+    }
+
+    /**
+     * @Route("/session/{id}/planning", name="session_planning")
+     */
+    public function showSessionPlanning(Session $session): Response
+    {
+        return $this->render('session/showSessionPlanning.html.twig', ['session' => $session]);
     }
 
     /////->-> TRAINING <-<-/////

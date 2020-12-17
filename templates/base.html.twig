@@ -42,7 +42,6 @@
 						<a class="nav-link btn-connected" href="{{ path('user_show', {'id':app.user.id}) }}">{{ app.user.email }}</a>
 						<a class="nav-link btn-connected" href="{{ path('app_logout') }}">Déconnexion</a>
 					{% else %}
-						{# <a class="nav-link btn-connected" href="{{ path('admin_panel') }}">Panel administrateur</a> #}
 						<a class="nav-link" href="{{ path('app_login') }}">CONNEXION</a>
 					{% endif %}
 				</nav>
@@ -55,7 +54,7 @@
 							<h1>V-B Formation</h1>
 							<p>20 place du capitaine Dreyfus
 								<br>68000 Colmar</p>
-							<p>00 00 00 00 00</p>
+							<p>06 62 65 68 98</p>
 						</div>
 						<div class="col divFooterCenter">
 							<a href="#">Nous contacter</a>
@@ -64,6 +63,8 @@
 						</div>
 						<div class="col">
 							<p>Notre centre de formation</p>
+							<div id="map"></div>
+							{# <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2665.733975923006!2d7.342510615833026!3d48.076777563372225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479165dafec8e67b%3A0x9e8dca1bd64f76cc!2s20%20Place%20du%20Capitaine%20Dreyfus%2C%2068000%20Colmar!5e0!3m2!1sfr!2sfr!4v1608023344527!5m2!1sfr!2sfr" width="300" height="160" frameborder="0" style="border:0;" allowfullscreen="true" aria-hidden="false" tabindex="0"></iframe> #}
 						</div>
 					</div>
 				</div>
@@ -74,6 +75,9 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+			<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxgrupvLoScm5dQHfdymaY7lBVR4g53wY&callback=initMap&libraries=&v=weekly" defer></script>
+			<script src="{{ asset('js/googleMaps.js') }}"></script>
 		{% endblock %}
 	</body>
 </html>

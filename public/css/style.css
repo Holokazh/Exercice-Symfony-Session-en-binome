@@ -70,10 +70,20 @@ footer a {
 
 .divFooter {
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .divFooterCenter a {
     margin-bottom: 1.5em;
+}
+
+/*** MAP ***/
+
+#map {
+    width: 400px;
+    height: 160px;
 }
 
 /***** VIEW LIST *****/
@@ -117,6 +127,14 @@ table tr:nth-child(even) {
 
 h2 {
     margin: 1em;
+}
+
+.containerCalendarPlanning {
+    width: 30%;
+    height: 30%;
+    margin: 5em 0 2em 15em;
+    padding: 1em;
+    border: 1px solid #3f3f3f;
 }
 
 /***** FORM ADD AND EDIT *****/
